@@ -1,0 +1,61 @@
+\documentclass[a4paper,11pt,twocolumn,twoside]{article}
+\usepackage[dvips]{graphicx}
+\usepackage{sepln_en}
+\usepackage{fullname}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nosectiondot, es-tabla, es-noindentfirst, es-nolists]{babel}
+
+\input epsf
+
+\setlength\titlebox{4in} %esto por defecto
+
+\title{Título completo del artículo centrado con Times New Roman negrita, tamaño 16}
+
+\author {\textbf{Nombre Apellidos1,$^1$} \textbf{Nombre Apellidos2$^2$}\\
+$^1$Universidad o lugar de trabajo\\
+$^2$Universidad o lugar de trabajo\\
+Información de contacto\\
+}
+
+\seplntranstitle{Título traducido del artículo centrado con Times New Roman negrita, cursiva, tamaño 14}
+
+\seplnclave{Palabras, palabras, palabras en castellano...}
+
+\seplnresumen{Resumen del artículo en castellano con una sangría a izquierda y
+derecha de 1 cm, justificado por ambos lados, con tamaño de fuente
+11.}
+
+
+\seplnkey{Palabras, palabras, palabras en inglés...}
+
+\seplnabstract{Resumen del artículo en inglés con una sangría a izquierda y
+derecha de 1 cm, justificado por ambos lados, con tamaño de fuente
+11.}
+
+\firstpageno{1}
+
+\begin{document}
+
+% la siguiente instrucción sólo se debe usar si el abstract sobrescribe el texto
+% la longitud variará según se necesite
+
+%\setlength\titlebox{20cm} % se aumenta el tamaño del espacio reservado para datos de título
+
+\label{firstpage} \maketitle
+
+%\begin{abstract}
+%Resumen del artículo con una sangría a izquierda y derecha de 0.32
+%cm, justificado por ambos lados, con tamaño de fuente 11.
+%
+%\end{abstract}
+
+\section{Título de nivel uno}
+
+\cite{piad2019general}
+
+\section*{Agradecimientos}
+
+\bibliographystyle{fullname}
+\bibliography{bibliography}
+
+\end{document}
