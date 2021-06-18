@@ -3,13 +3,13 @@
 \usepackage{sepln_en}
 \usepackage{fullname}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish,es-nosectiondot, es-tabla, es-noindentfirst, es-nolists]{babel}
+% \usepackage[spanish,es-nosectiondot, es-tabla, es-noindentfirst, es-nolists]{babel}
 
 \input epsf
 
 \setlength\titlebox{4in} %esto por defecto
 
-\title{Título completo del artículo centrado con Times New Roman negrita, tamaño 16}
+\title{Overview of the eHealth Knowledge Discovery Challenge at IberLEF 2021}
 
 \author {\textbf{Nombre Apellidos1,$^1$} \textbf{Nombre Apellidos2$^2$}\\
 $^1$Universidad o lugar de trabajo\\
@@ -17,7 +17,7 @@ $^2$Universidad o lugar de trabajo\\
 Información de contacto\\
 }
 
-\seplntranstitle{Título traducido del artículo centrado con Times New Roman negrita, cursiva, tamaño 14}
+\seplntranstitle{Resumen de la Tarea de Descubrimiento de Conocimiento en Salud en IberLEF 2021}
 
 \seplnclave{Palabras, palabras, palabras en castellano...}
 
@@ -49,11 +49,130 @@ derecha de 1 cm, justificado por ambos lados, con tamaño de fuente
 %
 %\end{abstract}
 
-\section{Título de nivel uno}
+\section{Introduction}
 
-\cite{piad2019general}
+The vast amount of knowledge stored in natural language
 
-\section*{Agradecimientos}
+How many pieces of knowledge are unconnected, and could lead to new discoveries,
+drug repositioning, trying new medication, finding causes for diseases, just
+by connecting facts and claims in different sources.
+
+Discovering knowledge from text requires assigning a semantic interpretation
+to the text that can be later converted to a data structure (e.g., ontology)
+
+The first step is detect the relevant concepts, or entities mentioned, and how
+they relate to each other
+
+The importance of multi-domain and multi-lingual approaches
+
+Motivation of the challenge
+
+Motivation of the design of a custom annotation schema that is less complex
+than e.g., AMR but still has some formal semantics
+
+Importance of working in low-resource languages and with scarse training data,
+to encourage transfer learning, unsupervised learning, and low cost solutions
+
+\section{Tasks Descriptions}
+
+The eHealth-KD challenge consists on the automatic sentence-level annotation
+of multi-token entities and binary relations among them.
+
+A custom annotation model has been defined, comprising 4 entity types and 13 relations,
+that attempts to capture a large part of factual semantics in technical documents,
+including enciclopedias, news, and scientific papers.
+
+The annotation model is explained in detail in \namecite{piad2019general}.
+
+A brief explanation is presented next.
+
+-- Explicar las entidades y relaciones como siempre.
+
+The challenge has been divided into two different subtasks:
+entity recognition and relation extraction.
+
+To evaluate each subtask, we count correct, partial, missing, and spurious
+annotations, and weight them according to an $F_1$ measure, independently per task.
+
+-- Fórmulas
+
+Furthermore, the challenge is graded in three different scenarios:
+one for each subtask and one where both subtasks are performed in sequence.
+This is the main scenario, which ultimately decides the winner of the challenge,
+although all other results are interesting.
+
+\section{Corpora and Resources}
+
+The Challenge is based on a corpus of documents composed of
+sentences taken from previous challenges and other resources,
+and newly annotated sentences.
+
+Three different sources of textual information are sampled: medline articles,
+wikinews articles, and biomedical papers from the CORD-19 corpus.
+
+The medline and wikinews articles are in Spanish, while CORD are in English.
+
+From the 2019 and 2020 challenges, X sentences where taken.
+
+For this new edition, Y sentences were annotated by a team of annotators.
+The team composition is 4 junior annotators and 3 senior annotators.
+2 junior annotators annotated each sentence, and a senior annotator performed the merging.
+
+The newly annotated sentences are used solely for evaluation purposes,
+while all training and development resources are reused from previous challenges.
+
+Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
+
+\begin{table}
+  \caption{Composition of the corpus, highlighting resources from previous
+  challenges and newly annotated sentences.\label{tab:corpus}}
+\end{table}
+
+\section{Systems Descriptions}
+´
+The challenge caught the attention of 8 participants from across the globe,
+who presented a variety of approaches clustered around deep learning architectures.
+
+-- Describir los sistemas
+
+\section{Challenge Results}
+
+Table~\ref{tab:results} summarizes the main results in the challenge.
+
+\begin{table}
+  \caption{Results.\label{tab:results}}
+\end{table}
+
+In Scenario 1, the best performing system is\dots
+
+-- Describir los demás escenarios
+
+\section{Discussion}
+
+-- Ver los sistemas con sus features y qué features son mejores o peores en cada tarea
+
+-- Comparar con los baselines en cada tarea, hasta qué nivel está resuelta cada tarea
+
+-- Hablar brevemente de la evolución de los sistemas en las 4 ediciones,
+cómo se han ido moviendo hacia transformers
+
+-- Hablar de la modelación de las entidades y relaciones como tareas separadas,
+la desventaja que puede representar eso porque los sistemas que han ganado hacen
+ambas cosas a la vez, o sea hay representación conjunta que es válida
+
+-- Hablar de las relaciones como problema binario, que no tiene en cuenta que ciertas
+relaciones implican posiblemente la aparición de otras.
+
+-- Hablar de que el orden en que el humano anota no es el mismo que un sistema,
+y que si se pudiera aprender algo de esto, dar con el dataset no solo las anotaciones
+sino en qué orden fueron realizadas.
+
+-- Hablar de la necesidad de cambiar de tareas hacia algo que refleje el valor
+del conocimiento extraído, como question answering.
+
+\section{Conclusions}
+
+\section*{Acknowledgments}
 
 \bibliographystyle{fullname}
 \bibliography{bibliography}
