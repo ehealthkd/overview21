@@ -143,7 +143,99 @@ Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
 The challenge caught the attention of 8 participants from across the globe,
 who presented a variety of approaches clustered around deep learning architectures.
 
--- Describir los sistemas
+%-- Describir los sistemas
+\begin{description}
+  \item[uhKD4:]  system is built upon two independent deep-learning-based architectures. Accordingly, two
+  different models are defined and each task is carried out separately. Task A is approached as a
+  sequence labelling problem in which each token from an input sequence is assigned a label that
+  represents the combination of the BILUOV entity tagging scheme with each one of the possible
+  types of an entity. The BILUOV tags correspond to: Begin, to represent the start of an entity;
+  Inner, to represent its continuation; Last, to represent its end; Unit, to represent single word
+  entities; Other, to represent words that are not a part of any entity; and oVerlapping, to represent
+  words that belong to multiple entities.Thus, the output of the model considers 21 different labels: the
+  O label and the combination of the remaining tags (BILUV) and the entity types (Concept,
+  Action, Predicate and Reference). The proposed approach to Task B is to solve a multi-class
+  classification problem, in which given a sentence and a highlighted pair of entities, one of the
+  predefined relations is assigned to occur from the first entity toward the second one. A new
+  artificial relation class none is defined to symbolize the non-occurrence of any relation between
+  a pair of entities.
+
+  \item[Vicomtech Joint Classifier:] This model is the result of the revision of our participation in the previous eHealth-KD edition
+  [2]. Most of the changes introduced in the current edition aim at simplifying components of
+  the architecture that seemed redundant or needlessly complex. In addition, we have forgone
+  the ability to predict multi-word discontinuous and/or overlapping entities like the shown in
+  Figure 1, which in any case required elaborate post-processing to yield acceptable results.
+  It consists of a single end-to-end deep neural network with
+  pre-trained BERT models as the core for the semantic representation of the input texts, that predicts all
+  the output variables—entities and relations—at the same time, modelling the whole problem jointly.
+  The main change w.r.t. the original implementation affects the representation of relations. The Joint
+  Classifier model achieved the first position in the main scenario of the competition and ranked second
+  in the rest of the scenarios.
+
+  \item[Vicomtech  Seq2Seq:] uses an approach based on an
+  encoder-decoder model. It transduces the input text into an output sequence by reading the input text.
+  The target sequence is a compact representation of the information contained in the gold-labels of
+  the datasets. This approach showed a promising performance despite not being competitive enough.
+  However, it poses an interesting potential future work.
+  This paradigm is way more flexible because it can ingest a sequence of any length,
+  and output another arbitrary sequence. That is, the output sequence is not tied to the structure
+  of the input; a text-to-text model can potentially encode any sort of information
+ 
+  \item[PUCRJ-PUCPR-UFMG:] a multilingual BERT-based system for joint entity recognition and relation extraction
+  in multidomain texts. Our end-to-end multitasking model benefits from the transformer architecture,
+  which has proved to capture better the global dependencies of the input text. Also, the use of a multilin-
+  gual model contributed to our system to perform well even in the set of tests containing non-Spanish
+  sentences. The method consists in an end-to-end multilingual
+  BERT-based system that jointly predicts both entities and relations. During training, the
+  proposed multi-task system is fine-tuned in 3 sequential steps: the first one prioritizes the entity
+  recognition task whereas the second gives precedence to the relation extraction one. Finally,
+  the third and last step is trained for both tasks using a multi-task strategy.
+
+  \item[UH-MMM:]  solution solves both tasks separately and sequentially. Thus, independent models
+  with different architectures and features were trained to solve the NER and RE problems. The
+  main distinction between the two architectures raises from the type of problem they solve. The
+  first task is posed as a tag prediction problem that takes the raw text of a sentence as input and
+  outputs two independent tag sequences: one in the BILOUV tag system for entity prediction and
+  another with the tags corresponding to each entity type (Concept, Action, Reference, Predicate).
+  The BILOUV tag scheme classification corresponds to Begin, for the start of an entity; Inner, for
+  the token in the middle; Last for the ending token; Unit, to represent single token entities; Other
+  to represent tokens that do not belong to any entity, and the oVerlapping tag is used to deal
+  with tokens that belong to multiple entities. On the other hand, the second task is addressed as
+  a series of pairwise queries among the entities present in the target sentence, oriented towards
+  identifying the relevant relations between the previously extracted entities.
+
+  \item[(IXA):]  use the pre-trained Language Model (LM), namely XML-
+  RoBERTa-base, to provide a Cross-lingual representation of tokens and the ability to transfer learning
+  from general domains. system was
+  designed as a pipeline of generic sequence labellers, each of them independently fine-tuned for each
+  subtask. The generic sequence labeller consists of a feed-forward network that learns how to align
+  a sequence of tokens into a sequence of labels regardless of the language and domain. This simple
+  straightforward system ranked in the third position in the main and Entity recognition scenario and
+  widely outperformed the other systems in the relation extraction scenario.
+
+  \item[Maoqin:]  Several deep learning models are used in plain text documents, such as
+  BERT-CRF, BiLSTM-CRF. Only the best result running in the local has been submitted. But the final
+  result of my method is indeed very low, with a score of 0.173 (F1), ranking 9th on the leaderboard.
+  Additional work needs to be done to improve our final result and complete the subtask B: relation
+  extraction.
+
+  \item[Maoquin:] For one method, the pre-trained BERT model has been taken as the basic representation.
+  For another method, BiLSTM has been preferred. The system achieved unsatisfied results in the
+  challenge for official evaluation in subtask A. Due to the colab’s time and resources limitation,
+  some strategies were not achieved. And subtask B: Relation Extraction has not been completed.
+  
+  \item [GuanZhengyi:] . We mainly used the classic BERT+BiLSTMs+CRF model architecture and replaced BERT
+  with BETO as the pre-training model. BETO is a BERT model pre-training on Spanish text. And we
+  add CNN before BiLSTM for further feature extraction. Our model architecture performed well in the
+  training set and development set for identifying the types of entities
+  uses the pre-training model BETO with stronger text feature
+  representation capabilities as the feature representation layer. After reading the eHealth 2020
+  papers, we fine-tuned the above architecture. We added CNN to further extract features of
+  text. We regard NER as a classification problem at the token level. We combined BETO with
+  CNN, BiLSTM and CRF model to extract global and local features of the text. That means we
+  input these word vectors into CNN, BiLSTM and CRF to calculate the corresponding scores and
+  perform entity recognition and BIO labeling.
+\end{description}
 
 \section{Challenge Results}\label{sec:results}
 
