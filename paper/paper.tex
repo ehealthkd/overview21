@@ -55,31 +55,35 @@ derecha de 1 cm, justificado por ambos lados, con tamaño de fuente
 The accelerated growth of the Internet and the increased production of textual resources in all areas of human endeavour has created both new opportunities and new challenges for the research community.
 On one hand, larger datasets can be collected and used to build increasingly powerful machine learning models~(e.g., GPT-3 and related).
 On the other hand, is becoming increasingly difficult to organise, categorise, cross-reference, and fact-check the textual information available online.
-The ease of access to both publication and consumption of textual information is also one of the causes of the increasingly worrying phenomena of fake news.
+The ease of access to both publication and consumption of textual information is arguably one of the root causes of the increasingly worrying phenomenon of fake news.
 
-The vast amount of knowledge stored in natural language
+Staying up-to-date on information about topics of interest is crucial in technical or scientific domains.
+For this purpose, specialists rely on a combination of curated soruces (e.g., domain-specific repositories like arxiv, bioarxiv, semantic scholar) and technologies for search and recommendation (e.g., google scholar).
+These resources significantly improve the experience of collecting and consuming large amounts of relevant information on a specific topic.
+Tools like Connected Papers~\cite{} and Papers with Code~\cite{} are one step beyond the indexing of documents, providing summarised and structured representations of the content in a collection of documents.
+However, it remains an open problem to automatically combine, summarise, and present the relevant information in a collection of documents in a semantic structure~(e.g., a knowledge graph) that allows a specialist to quickly grasp the essential concepts of a specific knowledge field.
 
-How many pieces of knowledge are unconnected, and could lead to new discoveries,
-drug repositioning, trying new medication, finding causes for diseases, just
-by connecting facts and claims in different sources.
+A potential solution to this problem would require methods to automatically detect in natural language the most relevant concepts and the factual statements in which they are related, possibly normalise them into well-established taxonomies and classifications, and store them in computational data structures where they can linked with related concepts, e.g., knowledge graphs.
+The first step of this process, i.e., the detection of relevant concepts and semantic relations in text, is already a challenging computational task, given the complexity and variability of natural language.
+To encourage research and development in this area, several academic competitions have been organised through the years by organizations such as CLEF, SEMEVAL, and more recently, IBERLEF.
 
-Discovering knowledge from text requires assigning a semantic interpretation
-to the text that can be later converted to a data structure (e.g., ontology)
+In this context, the eHealth Knowledge Discovery Challenge is designed to foster the development of automatic knowledge discovery systems for natural language sentences in a cross-domain and multi-lingual setting.
+Concretely, a token-level annotation model of 4 entities and 13 semantic relations is defined, and a corpus of more than 1500 sentences from different factual sources~(i.e., Spanish Medline articles, Spanish Wikinews articles, and English biomedical preprints related to COVID-19) is annotated.
+Two computational tasks are defined: the detection of multi-span, non-contiguous, and potentially overlapping named entities; and the detection of semantic relations between them.
+A shared annotation campaign was organized, where a total of 9 participants presented 10 different systems with varied levels of performance.
 
-The first step is detect the relevant concepts, or entities mentioned, and how
-they relate to each other
+The eHealth-KD task focuses on cross-domain, multi-lingual and low-resource solutions. This setting presents a significant challenge to existing state-of-the-art methods, which often rely on large amounts of training data.
+A succesful approach to the eHealth-KD must leverage transfer learning across both different domains and languages, since the vast majority of the training examples are provided in Spanish language and Medline articles, while only a small development set is available in the remaining settings.
+With this added complexity, we expect to encourage solutions that can be deployed in low-resource environments, where is unfeasible to train large language models over longs periods of time.
 
-The importance of multi-domain and multi-lingual approaches
+The remaining of this paper is organized as follows.
+Section~\ref{sec:task} describes the eHealth-KD tasks in greater detail, including the annotation model and performance metrics.
+Section~\ref{sec:resources} describes the corpora and other resources created for this challenge and presents some qualitative analysis of their characteristics.
+Section~\ref{sec:systems} describes the different systems presented in the challenge and summarises the main approaches and most common characteristics they share.
+Section~\ref{sec:results} presents the main results of the challenge.
+Section~\ref{sec:discussion} discusses the most interesting insights of the challenge and highlights both the most relevant lessons learned and potential improvements for future similar endeavours.
 
-Motivation of the challenge
-
-Motivation of the design of a custom annotation schema that is less complex
-than e.g., AMR but still has some formal semantics
-
-Importance of working in low-resource languages and with scarce training data,
-to encourage transfer learning, unsupervised learning, and low cost solutions
-
-\section{Tasks Descriptions}
+\section{Tasks Descriptions}\label{sec:task}
 
 The eHealth-KD challenge consists on the automatic sentence-level annotation
 of multi-token entities and binary relations among them.
@@ -107,7 +111,7 @@ one for each subtask and one where both subtasks are performed in sequence.
 This is the main scenario, which ultimately decides the winner of the challenge,
 although all other results are interesting.
 
-\section{Corpora and Resources}
+\section{Corpora and Resources}\label{sec:resources}
 
 The Challenge is based on a corpus of documents composed of
 sentences taken from previous challenges and other resources,
@@ -134,14 +138,14 @@ Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
   challenges and newly annotated sentences.\label{tab:corpus}}
 \end{table}
 
-\section{Systems Descriptions}
+\section{Systems Descriptions}\label{sec:systems}
 ´
 The challenge caught the attention of 8 participants from across the globe,
 who presented a variety of approaches clustered around deep learning architectures.
 
 -- Describir los sistemas
 
-\section{Challenge Results}
+\section{Challenge Results}\label{sec:results}
 
 Table~\ref{tab:results} summarizes the main results in the challenge.
 
@@ -153,7 +157,7 @@ In Scenario 1, the best performing system is\dots
 
 -- Describir los demás escenarios
 
-\section{Discussion}
+\section{Discussion}\label{sec:discussion}
 
 -- Ver los sistemas con sus features y qué features son mejores o peores en cada tarea
 
@@ -176,7 +180,7 @@ sino en qué orden fueron realizadas.
 -- Hablar de la necesidad de cambiar de tareas hacia algo que refleje el valor
 del conocimiento extraído, como question answering.
 
-\section{Conclusions}
+\section{Conclusions}\label{sec:conclusions}
 
 \section*{Acknowledgments}
 
