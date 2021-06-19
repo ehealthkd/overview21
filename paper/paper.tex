@@ -88,18 +88,17 @@ Section~\ref{sec:discussion} discusses the most interesting insights of the chal
 
 \section{Tasks Descriptions}\label{sec:task}
 
+\begin{figure*}[htb]
+  \includegraphics[width=\textwidth]{model.png}
+  \caption{Examples the annotation model defined for the eHealth-KD Challenge.\label{fig:model}}
+\end{figure*}
+
 The eHealth-KD challenge consists on the automatic sentence-level annotation
 of multi-token entities and binary relations among them.
-
 A custom annotation model has been defined, comprising 4 entity types and 13 relations,
 that attempts to capture a large part of factual semantics in technical documents,
 including enciclopedias, news, and scientific papers. The annotation model is explained in detail in \namecite{piad2019general}. Figure~\ref{fig:model} shows an illustrative example of the annotation model in three Spanish sentences.
 The challenge has been divided into two different subtasks: entity recognition and relation extraction.
-
-\begin{figure*}
-  \includegraphics[width=\textwidth]{model.png}
-  \caption{Examples the annotation model defined for the eHealth-KD Challenge.\label{fig:model}}
-\end{figure*}
 
 \subsection{Subtask A: Entity recognition}
 
@@ -218,25 +217,23 @@ Table~\ref{tab:participants} summarises the main characteristics of each approac
 A brief summary of each system follows:
 
 %-- Describir los sistemas
-\begin{description}
-  \item[Team Codestrange] proposes
+  \paragraph{Codestrange} proposes
 
-  \item[Team GuanZhengy] presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
+  \paragraph{GuanZhengy} presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
 
-  \item[Team IXA] models both substasks are sequence labeling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
+  \paragraph{IXA} models both substasks are sequence labeling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
 
-  \item[Team JAD] proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity~\cite{JAD2021}.
+  \paragraph{JAD} proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity~\cite{JAD2021}.
 
-  \item[Team Maoquin] presents a traditional NER architecture based on BERT pre-trained embeddings and BIO tags for Subtask A, combined with Bi-LSTM and CRF layers~\cite{Maoqin2021}.
+  \paragraph{Maoquin} presents a traditional NER architecture based on BERT pre-trained embeddings and BIO tags for Subtask A, combined with Bi-LSTM and CRF layers~\cite{Maoqin2021}.
 
-  \item[Team PUCRJ-PUCPR-UFMG] proposes a joint model that outputs token labels~(modelled as a sequence labelling problem) and pairwise relation labels, based on BERT pre-trained embeddings as the main feature~\cite{lucas2021}.
+  \paragraph{PUCRJ-PUCPR-UFMG} proposes a joint model that outputs token labels~(modelled as a sequence labelling problem) and pairwise relation labels, based on BERT pre-trained embeddings as the main feature~\cite{lucas2021}.
 
-  \item[Team uhKD4] models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings~\cite{uhKD42021}.
+  \paragraph{uhKD4} models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings~\cite{uhKD42021}.
 
-  \item[Team UH-MMM] also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation predction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
+  \paragraph{UH-MMM} also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation predction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
 
-  \item[Team Vicomtech] presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediciton~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, finetunned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
-\end{description}
+  \paragraph{Vicomtech} presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediciton~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, finetunned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
 
 How can see in the Table~\ref{tab:participants} BERT and variants  predominate as feature extractor although some teams add clasic NLP featuures.
 In contrast with previus years the join aproche is used by more than the half of system that present in the involve task
