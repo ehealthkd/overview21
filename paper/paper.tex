@@ -140,14 +140,7 @@ Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
   challenges and newly annotated sentences.\label{tab:corpus}}
 \end{table}
 
-\section{Systems Descriptions}\label{sec:systems}
-
-The challenge caught the attention of 8 participants from across the globe,
-who presented a variety of approaches clustered around deep learning architectures.
-Table~\ref{tab:participants} summarises the main characteristics of each approach presented.
-A brief summary of each system follows:
-
-\begin{table*}[ht]
+\begin{table*}[t!]
   \centering
   \begin{tabularx}{\textwidth}{lXllll}
     \toprule
@@ -167,6 +160,13 @@ A brief summary of each system follows:
   \end{tabularx}
   \caption{Summary of the approaches presented at the eHealth-KD Challenge.\label{tab:participants}}
 \end{table*}
+
+\section{Systems Descriptions}\label{sec:systems}
+
+The challenge caught the attention of 8 participants from across the globe,
+who presented a variety of approaches clustered around deep learning architectures.
+Table~\ref{tab:participants} summarises the main characteristics of each approach presented.
+A brief summary of each system follows:
 
 %-- Describir los sistemas
 \begin{description}
@@ -194,7 +194,7 @@ A brief summary of each system follows:
 How can see in the table \ref{} BERT and variants predominate as feature extractor although
 some teams add clasic NLP featuures.
 In contrast with previus years the join aproche is used by more than the half of system that present in the involve task
-Como en años anteriores the subtask A is model as sequens labeling using some variant of BIO encoding. 
+Como en años anteriores the subtask A is model as sequens labeling using some variant of BIO encoding.
 Likewise the subtask B is commonly model as pair wise classification.
 
 Two approaches break this treads IXA and VICONTECH, The fisrt model the task B
@@ -206,9 +206,28 @@ a semiestructured representation where are encode all the entities and their rel
 
 Table~\ref{tab:results} summarizes the main results in the challenge.
 
-\begin{table}
+\begin{table*}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{lccccccccc}
+    \toprule
+    & \multicolumn{3}{c}{\textbf{Main}} & \multicolumn{3}{c}{\textbf{Task A}} & \multicolumn{3}{c}{\textbf{Task B}} \\
+    \textbf{Team}    & $F_1$ & $P$   & $R$   & $F_1$ & $P$   & $R$   & $F_1$ & $P$   & $R$ \\
+    \midrule
+    Vicomtech        & 0.531 & 0.540 & 0.534 & 0.684 & 0.699 & 0.747 & 0.371 & 0.541 & 0.283 \\
+    PUCRJ-PUCPR-UFMG & 0.528 & 0.568 & 0.502 & 0.706 & 0.714 & 0.697 & 0.263 & 0.366 & 0.205 \\
+    IXA              & 0.498 & 0.464 & 0.538 & 0.653 & 0.613 & 0.698 & 0.430 & 0.453 & 0.409 \\
+    uhKD4            & 0.422 & 0.485 & 0.374 & 0.527 & 0.517 & 0.537 & 0.317 & 0.556 & 0.222 \\
+    UH-MMM           & 0.338 & 0.291 & 0.403 & 0.607 & 0.546 & 0.685 & 0.053 & 0.077 & 0.041 \\
+    Codestrange      & 0.232 & 0.337 & 0.176 & 0.080 & 0.415 & 0.044 & 0.032 & 0.437 & 0.017 \\
+    baseline         & 0.232 & 0.337 & 0.176 & 0.306 & 0.350 & 0.271 & 0.032 & 0.437 & 0.017 \\
+    JAD              & 0.109 & 0.234 & 0.071 & 0.262 & 0.315 & 0.224 & 0.007 & 0.375 & 0.003 \\
+    GuanZhengyi      & -     & -     & -     & 0.334 & 0.520 & 0.245 & -     & -     & -     \\
+    Maoqin           & -     & -     & -     & 0.173 & 0.271 & 0.127 & -     & -     & -     \\
+    \bottomrule
+  \end{tabular}}
+
   \caption{Results.\label{tab:results}}
-\end{table}
+\end{table*}
 
 In Scenario 1, the best performing system is\dots
 
