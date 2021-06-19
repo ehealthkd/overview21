@@ -147,11 +147,11 @@ To evaluate each subtask, we count correct, partial, missing, and spurious
 annotations, and weight them according to an $F_1$ measure, independently per task.
 
 -- Fórmulas
-Rec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + M_A + M_B}
+$$Rec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + M_A + M_B}$$
 
-Prec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + S_A + S_B}
+$$Prec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + S_A + S_B}$$
 
-F_{1AB} = 2 \cdot \frac{Prec_{AB} \cdot Rec_{AB}}{Prec_{AB} + Rec_{AB}}
+$$F_{1AB} = 2 \cdot \frac{Prec_{AB} \cdot Rec_{AB}}{Prec_{AB} + Rec_{AB}}$$
 
 Furthermore, the challenge is graded in three different scenarios:
 one for each subtask and one where both subtasks are performed in sequence.
