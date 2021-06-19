@@ -231,6 +231,13 @@ who presented a variety of approaches clustered around deep learning architectur
   CNN, BiLSTM and CRF model to extract global and local features of the text. That means we
   input these word vectors into CNN, BiLSTM and CRF to calculate the corresponding scores and
   perform entity recognition and BIO labeling.
+
+  \item[JAD:] The model consist of identifying key-phrases
+  and relations among them using a pre-defined system. It was a simple model that summarizes
+  some parts of a general approach to NLP problem. The system is easy to train and test using
+  cloud services like Google Colab. It did not perform very well at the competition.
+  Our system is based on a pre-trained multi-lingual BERT[2] layer which pre-processes the input sentence and then feeds the generated
+embeddings to the deep learning model. 
 \end{description}
 
 \section{Challenge Results}
