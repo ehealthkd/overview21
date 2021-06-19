@@ -221,32 +221,29 @@ A brief summary of each system follows:
 \begin{description}
   \item[Team Codestrange] proposes
 
-  \item[Team GuanZhengy~\cite{GuanZhengyi2021}] presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags.
+  \item[Team GuanZhengy] presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
 
-  \item[Team IXA~\cite{edgarandres2021}] models both substasks are sequence labeling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels.
+  \item[Team IXA] models both substasks are sequence labeling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
 
-  \item[Team JAD~\cite{JAD2021}] proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity.
+  \item[Team JAD] proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity~\cite{JAD2021}.
 
-  \item[Team Maoquin~\cite{Maoqin2021}] presents a traditional NER architecture based on BERT pre-trained embeddings and BIO tags for Subtask A, combined with Bi-LSTM and CRF layers.
+  \item[Team Maoquin] presents a traditional NER architecture based on BERT pre-trained embeddings and BIO tags for Subtask A, combined with Bi-LSTM and CRF layers~\cite{Maoqin2021}.
 
-  \item[Team PUCRJ-PUCPR-UFMG~\cite{PUCRJ-PUCPR-UFMG2021}] proposes a joint model that outputs token labels~(modelled as a sequence labelling problem) and pairwise relation labels, based on BERT pre-trained embeddings as the main feature.
+  \item[Team PUCRJ-PUCPR-UFMG] proposes a joint model that outputs token labels~(modelled as a sequence labelling problem) and pairwise relation labels, based on BERT pre-trained embeddings as the main feature~\cite{lucas2021}.
 
-  \item[Team uhKD4~\cite{uhKD42021}] models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings.
+  \item[Team uhKD4] models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings~\cite{uhKD42021}.
 
-  \item[Team UH-MMM~\cite{uh-mmm2021}] also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation predction. They also compare several different embeddings, including health-specific and general-purpose approaches.
+  \item[Team UH-MMM] also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation predction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
 
-  \item[Team Vicomtech~\cite{vicomtech2021}] presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediciton~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, finetunned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass.
+  \item[Team Vicomtech] presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediciton~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, finetunned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
 \end{description}
 
--- Describir ideas generales más usadas
-
-How can see in the table \ref{} BERT and variants predominate as feature extractor although
-some teams add clasic NLP featuures.
+How can see in the Table~\ref{tab:participants} BERT and variants  predominate as feature extractor although some teams add clasic NLP featuures.
 In contrast with previus years the join aproche is used by more than the half of system that present in the involve task
 Como en años anteriores the subtask A is model as sequens labeling using some variant of BIO encoding.
 Likewise the subtask B is commonly model as pair wise classification.
 
-Two approaches break this treads IXA and VICONTECH, The fisrt model the task B
+Two approaches break this treads IXA and VICOMTECH, The first model the task B
 also as sequence labeling reusing the same arquitecture that subtask A.
 Th second present a arquitecture text to text that translate que raw sentence To
 a semiestructured representation where are encode all the entities and their relations.
