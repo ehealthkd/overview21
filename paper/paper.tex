@@ -115,7 +115,7 @@ Reference: identifies a textual element that refers to an entity –of the same 
 
 \subsection{Subtask B: Relation extraction}
 
-Subtask B continues from the output of Subtask A, by linking the entities detected and labelled in the input document. The purpose of this subtask is to recognize all relevant semantic relationships between the entities recognized. 
+Subtask B continues from the output of Subtask A, by linking the entities detected and labelled in the input document. The purpose of this subtask is to recognize all relevant semantic relationships between the entities recognized.
 
 The semantic relations are divided in different categories:
 
@@ -143,8 +143,9 @@ arg: indicates an additional entity that specifies a value for the predicate to 
 
 \subsection{Evaluation}
 
-To evaluate each subtask, we count correct, partial, missing, and spurious
+To evaluate each subtask, we count correct, incorrect, partial, missing, and spurious
 annotations, and weight them according to an $F_1$ measure, independently per task.
+Partial annotations~(i.e., where predicted entities overlap with the gold standard) are counted as half the value of correct annotations.
 
 -- Fórmulas
 Rec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + M_A + M_B}
@@ -164,27 +165,27 @@ The Challenge is based on a corpus of documents composed of
 sentences taken from previous challenges and other resources,
 and newly annotated sentences.
 
-For the eHealth-KD 2021 edition, systems will be evaluated in a cross-domain and multi-language corpus. 
-Both the training, development, and test collections will contain sentences extracted from MedlinePlus, Wikinews, and the CORD-19 corpus, 
-all of them related with health topics, but showing a significant variety in terms of format and structure. 
+For the eHealth-KD 2021 edition, systems will be evaluated in a cross-domain and multi-language corpus.
+Both the training, development, and test collections will contain sentences extracted from MedlinePlus, Wikinews, and the CORD-19 corpus,
+all of them related with health topics, but showing a significant variety in terms of format and structure.
 Furthermore, the majority of sentences are in Spanish, but a small set of English sentences is also included, to evaluate generalization across domains.
 
-In the training collection, each sentence will be labeled with its corresponding domain and language (Spanish or English), 
-so that participants can potentially fine-tune different models for each domain/language and learn to identify them in the text. 
-In the development collection, sentences will be mixed from all different sources and no labelling will be provided, 
+In the training collection, each sentence will be labeled with its corresponding domain and language (Spanish or English),
+so that participants can potentially fine-tune different models for each domain/language and learn to identify them in the text.
+In the development collection, sentences will be mixed from all different sources and no labelling will be provided,
 so that participants can evaluate their systems in a similar environment to the testing set.
 
-Participants can opt-out of the cross-domain / multi-language challenge at evaluation time, 
+Participants can opt-out of the cross-domain / multi-language challenge at evaluation time,
 in which case only the metrics from the main domain (MedlinePlus) and language (Spanish) will be used.
 
-As in the previous edition, the corpus for eHealth-KD 2021 will use a corpus extracted from MedlinePlus sources, plus additional resources. 
-First, the same corpus used in the 2020 edition will be provided for training and development, while a new set of previously unlabelled sentences will be manually annotated and used for the test collection. Additionally, health-related news sourced from Wikinews will be also provided for training and development. 
+As in the previous edition, the corpus for eHealth-KD 2021 will use a corpus extracted from MedlinePlus sources, plus additional resources.
+First, the same corpus used in the 2020 edition will be provided for training and development, while a new set of previously unlabelled sentences will be manually annotated and used for the test collection. Additionally, health-related news sourced from Wikinews will be also provided for training and development.
 Finally, a small set of sentences from scientific papers in the CORD-19 corpus (in English language) will be selected, annotated, and distributed in the development, and testing collections.
 
 %Three different sources of textual information are sampled: medline articles,
 %wikinews articles, and biomedical papers from the CORD-19 corpus.
 
-The corpus will be divided into three sections. Training and development sets are published along with baseline implementations, 
+The corpus will be divided into three sections. Training and development sets are published along with baseline implementations,
 for participants to train and fine-tune their systems. These files consist of both plain text input and the expected outputs for both subtasks.
 
 %The medline and wikinews articles are in Spanish, while CORD are in English.
@@ -198,7 +199,7 @@ The team composition is 4 junior annotators and 3 senior annotators.
 The newly annotated sentences are used solely for evaluation purposes,
 while all training and development resources are reused from previous challenges.
 
-contains 3000 sentences. The first 2700 are in Spanish and the last 300 are in English. Of these, only 50 in each language will 
+contains 3000 sentences. The first 2700 are in Spanish and the last 300 are in English. Of these, only 50 in each language will
 be used for evaluation (the rest are provided to discourage manual annotation), but you must output annotations for all of the sentences,
 since the reference sentences are shuffled.
 
