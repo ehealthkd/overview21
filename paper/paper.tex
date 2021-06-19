@@ -73,7 +73,7 @@ Two computational tasks are defined: the detection of multi-span, non-contiguous
 A shared annotation campaign was organized, where a total of 9 participants presented 10 different systems with varied levels of performance.
 
 The eHealth-KD task focuses on cross-domain, multi-lingual and low-resource solutions. This setting presents a significant challenge to existing state-of-the-art methods, which often rely on large amounts of training data.
-A succesful approach to the eHealth-KD must leverage transfer learning across both different domains and languages, since the vast majority of the training examples are provided in Spanish language and Medline articles, while only a small development set is available in the remaining settings.
+A succesful approach to the eHealth-KD must leverage transfer learning across different domains and languages, since the vast majority of the training examples are provided in Spanish language and from the Medline domain, while only a small development set is available in the remaining settings.
 With this added complexity, we expect to encourage solutions that can be deployed in low-resource environments, where is unfeasible to train large language models over longs periods of time.
 
 The remaining of this paper is organized as follows.
@@ -180,7 +180,7 @@ who presented a variety of approaches clustered around deep learning architectur
   This paradigm is way more flexible because it can ingest a sequence of any length,
   and output another arbitrary sequence. That is, the output sequence is not tied to the structure
   of the input; a text-to-text model can potentially encode any sort of information
- 
+
   \item[PUCRJ-PUCPR-UFMG:] a multilingual BERT-based system for joint entity recognition and relation extraction
   in multidomain texts. Our end-to-end multitasking model benefits from the transformer architecture,
   which has proved to capture better the global dependencies of the input text. Also, the use of a multilin-
@@ -217,13 +217,11 @@ who presented a variety of approaches clustered around deep learning architectur
   BERT-CRF, BiLSTM-CRF. Only the best result running in the local has been submitted. But the final
   result of my method is indeed very low, with a score of 0.173 (F1), ranking 9th on the leaderboard.
   Additional work needs to be done to improve our final result and complete the subtask B: relation
-  extraction.
-
-  \item[Maoquin:] For one method, the pre-trained BERT model has been taken as the basic representation.
+  extraction. For one method, the pre-trained BERT model has been taken as the basic representation.
   For another method, BiLSTM has been preferred. The system achieved unsatisfied results in the
   challenge for official evaluation in subtask A. Due to the colab’s time and resources limitation,
   some strategies were not achieved. And subtask B: Relation Extraction has not been completed.
-  
+
   \item [GuanZhengyi:] . We mainly used the classic BERT+BiLSTMs+CRF model architecture and replaced BERT
   with BETO as the pre-training model. BETO is a BERT model pre-training on Spanish text. And we
   add CNN before BiLSTM for further feature extraction. Our model architecture performed well in the
