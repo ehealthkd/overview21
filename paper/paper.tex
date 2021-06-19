@@ -103,10 +103,55 @@ A brief explanation is presented next.
 The challenge has been divided into two different subtasks:
 entity recognition and relation extraction.
 
+\subsection{Subtask A: Entity recognition}
+Given a list of eHealth documents written in Spanish, the goal of this subtask is to identify all the entities per document and their types. These entities are all the relevant terms (single word or multiple words) that represent semantically important elements in a sentence. The following figure shows the relevant entities that appear in a set of example sentences.
+
+Entities will always consist of one or more complete words (i.e., not a prefix or a suffix of a word), and will never include any surrounding punctuation symbols, parenthesis, etc. There are four types for entities:
+
+Concept: indentifies a relevant term, concept, idea, in the knowledge domain of the sentence.
+Action: indentifies a process or modification of other entities. It can be indicated by a verb or verbal construction, such as “afecta” (affects), but also by nouns, such as “exposición” (exposition), where it denotes the act of being exposed to the Sun, and “daños” (damages), where it denotes the act of damaging the skin. It can also be used to indicate non-verbal functional relations, such as “padre” (parent), etc.
+Predicate: identifies a function or filter of another set of elements, which has a semantic label in the text, such as “mayores” (older), and is applied to an entity, such as “personas” (people) with some additional arguments such as “60 años” (60 years).
+Reference: identifies a textual element that refers to an entity –of the same sentence or of different one–, which can be indicated by textual clues such as “esta”, “aquel”, etc.
+
+\subsection{Subtask B: Relation extraction}
+
+Subtask B continues from the output of Subtask A, by linking the entities detected and labelled in the input document. The purpose of this subtask is to recognize all relevant semantic relationships between the entities recognized. 
+
+The semantic relations are divided in different categories:
+
+General relations (6): general-purpose relations between two concepts (it involves Concept, Action, Predicate, and Reference) that have a specific semantic. When any of these relations applies, it is preferred over a domain relation –tagging a key phrase as a link between two information units–, since their semantic is independent of any textual label:
+
+is-a: indicates that one entity is a subtype, instance, or member of the class identified by the other.
+same-as: indicates that two entities are semantically the same.
+has-property: indicates that one entity has a given property or characteristic.
+part-of: indicates that an entity is a constituent part of another.
+causes: indicates that one entity provoques the existence or occurrence of another.
+entails: indicates that the existence of one entity implies the existence or occurrence of another.
+Contextual relations (3): allow to refine an entity (it involves Concept, Action, Predicate, and Reference) by attaching modifiers. These are:
+
+in-time: to indicate that something exists, occurs or is confined to a time-frame, such as in “exposición” in-time “verano”.
+in-place: to indicate that something exists, occurs or is confined to a place or location.
+in-context: to indicate a general context in which something happens, like a mode, manner, or state, such as “exposición” in-context “prolongada”.
+Action roles (2): indicate which role play the entities related to an Action:
+
+subject: indicates who performs the action, such as in “[el] asma afecta […]”.
+target: indicates who receives the effect of the action, such as in “[…] afecta [las] vías respiratorias”. Actions can have several subjects and targets, in which case the semantic interpreted is that the union of the subjects performs the action over each of the targets.
+Predicate roles (2): indicate which role play the entities related to a Predicate:
+
+domain: indicates the main entity on which the predicate applies.
+arg: indicates an additional entity that specifies a value for the predicate to make sense. The exact semantic of this argument depends on the semantic of the predicate label, such as in “mayores [de] 60 años”, where the predicate label “mayores” indicates that “60 años” is a quantity, that restricts the minimum age for the predicate to be true.
+
+\subsection{Evaluation}
+
 To evaluate each subtask, we count correct, partial, missing, and spurious
 annotations, and weight them according to an $F_1$ measure, independently per task.
 
 -- Fórmulas
+Rec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + M_A + M_B}
+
+Prec_{AB} = \frac{C_A + C_B + \frac{1}{2} P_A}{C_A + I_A + C_B + P_A + S_A + S_B}
+
+F_{1AB} = 2 \cdot \frac{Prec_{AB} \cdot Rec_{AB}}{Prec_{AB} + Rec_{AB}}
 
 Furthermore, the challenge is graded in three different scenarios:
 one for each subtask and one where both subtasks are performed in sequence.
@@ -119,10 +164,30 @@ The Challenge is based on a corpus of documents composed of
 sentences taken from previous challenges and other resources,
 and newly annotated sentences.
 
-Three different sources of textual information are sampled: medline articles,
-wikinews articles, and biomedical papers from the CORD-19 corpus.
+For the eHealth-KD 2021 edition, systems will be evaluated in a cross-domain and multi-language corpus. 
+Both the training, development, and test collections will contain sentences extracted from MedlinePlus, Wikinews, and the CORD-19 corpus, 
+all of them related with health topics, but showing a significant variety in terms of format and structure. 
+Furthermore, the majority of sentences are in Spanish, but a small set of English sentences is also included, to evaluate generalization across domains.
 
-The medline and wikinews articles are in Spanish, while CORD are in English.
+In the training collection, each sentence will be labeled with its corresponding domain and language (Spanish or English), 
+so that participants can potentially fine-tune different models for each domain/language and learn to identify them in the text. 
+In the development collection, sentences will be mixed from all different sources and no labelling will be provided, 
+so that participants can evaluate their systems in a similar environment to the testing set.
+
+Participants can opt-out of the cross-domain / multi-language challenge at evaluation time, 
+in which case only the metrics from the main domain (MedlinePlus) and language (Spanish) will be used.
+
+As in the previous edition, the corpus for eHealth-KD 2021 will use a corpus extracted from MedlinePlus sources, plus additional resources. 
+First, the same corpus used in the 2020 edition will be provided for training and development, while a new set of previously unlabelled sentences will be manually annotated and used for the test collection. Additionally, health-related news sourced from Wikinews will be also provided for training and development. 
+Finally, a small set of sentences from scientific papers in the CORD-19 corpus (in English language) will be selected, annotated, and distributed in the development, and testing collections.
+
+%Three different sources of textual information are sampled: medline articles,
+%wikinews articles, and biomedical papers from the CORD-19 corpus.
+
+The corpus will be divided into three sections. Training and development sets are published along with baseline implementations, 
+for participants to train and fine-tune their systems. These files consist of both plain text input and the expected outputs for both subtasks.
+
+%The medline and wikinews articles are in Spanish, while CORD are in English.
 
 From the 2019 and 2020 challenges, X sentences where taken.
 
@@ -132,6 +197,10 @@ The team composition is 4 junior annotators and 3 senior annotators.
 
 The newly annotated sentences are used solely for evaluation purposes,
 while all training and development resources are reused from previous challenges.
+
+contains 3000 sentences. The first 2700 are in Spanish and the last 300 are in English. Of these, only 50 in each language will 
+be used for evaluation (the rest are provided to discourage manual annotation), but you must output annotations for all of the sentences,
+since the reference sentences are shuffled.
 
 Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
 
