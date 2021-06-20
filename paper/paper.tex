@@ -251,19 +251,21 @@ A brief summary of each system follows:
 
   \paragraph{Vicomtech} presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediciton~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, finetunned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
 
-How can see in the Table~\ref{tab:participants} BERT and variants  predominate as feature extractor although some teams add clasic NLP featuures.
-In contrast with previus years the join aproche is used by more than the half of system that present in the involve task
-Como en años anteriores the subtask A is model as sequens labeling using some variant of BIO encoding.
-Likewise the subtask B is commonly model as pair wise classification.
+As it can be seen in Table~\ref{tab:participants}, the predominant solution for feature extraction is using pre-trained language models such as BERT and its variants, although some approaches also include classic NLP features.
+In contrast with previous editions, the joint approach~(solving both subtasks simultaneously with a shared architecture) is used by more than half of the systems that tackle both subtasks.
+As in previous editions, subtask A is commonly modelled as a sequence labelling problem using some variant of the BIO encoding.
+Likewise, subtask B is commonly modelled as a pairwise classification problem, by combining all pairs of entities detected in each sentence.
 
-Two approaches break this treads IXA and VICOMTECH, The first model the task B
-also as sequence labeling reusing the same arquitecture that subtask A.
-Th second present a arquitecture text to text that translate que raw sentence To
-a semiestructured representation where are encode all the entities and their relations.
+Two approaches stand out as distinctly novel in this edition of the challenge, presented by IXA and Vicomtech, respectively.
+The former models subtask B also as a sequence labelling problem, reusing the same architecture as in subtask A.
+The latter presents a text-to-text architecture which translates a raw sentence into a semi-structured representation that encodes all the entities and their relations.
 
-\section{Challenge Results}\label{sec:results}
+\section{Results and Discussion}\label{sec:results}
 
-Table~\ref{tab:results} summarizes the main results in the challenge.
+Table~\ref{tab:results} summarizes the main results obtained by all participants in the eHealth-KD 2021 Challenge.
+In the main scenario the best performing system was the joint architecture presented by Vicomtech, followed closely by a very similar architecture presented by PUCRJ-PUCPR-UFMG.
+Both approaches are based on the previous edition's winner, further confirming the hypothesis that using end-to-end architectures for solving both subtasks simultaneously outperforms task-specific architectures.
+This advantage seems to be mostly due to the strength of these solutions for solving subtask A, since in subtask B the best performing system is the sequence labelling architecture presented by IXA.
 
 \begin{table*}
   \resizebox{\textwidth}{!}{
@@ -288,34 +290,45 @@ Table~\ref{tab:results} summarizes the main results in the challenge.
   \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted.\label{tab:results}}
 \end{table*}
 
-In Scenario 1, the best performing system is\dots
+As expected by the relative complexity of the tasks, results for subtask A are significantly better than for subtask B.
+However, neither subtask can be said to be fundamentally solved up to human performance.
+The human benchmark, estimated by inter-annotator agreement, is at least $10$ to $20$ percentual points above the best performing systems in both subtasks, with this gap being larger in subtask B.\todo{estimate human benchmark}
 
--- Describir los demás escenarios
+The use of pre-trained language models seems to provide a significant advantage, taking into consideration the complexities of dealing with multiple domains and languages.
+By leveraging multi-lingual models, most systems are capable of dealing with English sentences even though there is little to no training data~(i.e., only 50 English sentences were annotated in the development).
+However, there is a significant gap in performance across domains and languages, as shown by Table~\ref{tab:models}.\todo{diferencias por dominio y lenguaje}
+This suggests that pre-trained models alone are insuficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
 
-\section{Discussion}\label{sec:discussion}
+Modelling both subtasks independently seems to be less effective than using some form of shared architecture.
+The three best performing systems exploit in some manner the interrelation between both subtasks, either by using a single architecture with separate outputs~(thus sharing a large part of the feature extraction model), or by reusing the same architecture in both subtasks.
+In contrast, systems that attempt to solve subtask B based on structured information obtained from subtask A have a significant drop in performance in this task.
+This suggests that subtask B also benefits from direct access to the raw sentence, which cannot be effectively captured with position embeddings or dependency subtrees alone.
 
--- Ver los sistemas con sus features y qué features son mejores o peores en cada tarea
+One surprising result is that the best performing system in subtask B uses a sequence labelling approach, as opposed to the most commonly deployed pairwise classification model.
+IXA's approach for subtask B consists in feeding a regular NER architecture~(the same one used for subtask A) with a raw sentence, where two entities of interest are marked.
+The model is trained to output a BIO sequence where tags are aligned with the marked entities and correspond to the label of the relation among them, if any.
+This requires $O(|E|^2)$ queries to the model for each sentence with $|E|$ entities detected.
+We believe this approach can be improved by training the model with all entities at once, predicting one-to-many relations in a single pass, thus reducing the complexity to $O(|E|)$ per sentence.
 
--- Comparar con los baselines en cada tarea, hasta qué nivel está resuelta cada tarea
+A second promising approach for subtask B is presented by Vicomtech, although it didn't obtain competitive enough results.
+This approach consists of a text-to-text architecture, fine-tuned from a T5 language model on the task of translating from raw sentences to a semi-structured output that encodes the result of both subtasks.
+The output structure consists of a list of tuples with all the pairs of entities detected and their corresponding relations.
+However, being a text-to-text model, it suffers from hallucination, which requires some post-processing to fix.
+Furthermore, the output structure still contains unnecessary redundancy~(the same entities need to be predicted for every relation in which they appear).
+However, we believe that this is a fruitful direction for future research that should be explored in greater depth.
 
--- Hablar brevemente de la evolución de los sistemas en las 4 ediciones,
-cómo se han ido moviendo hacia transformers
+Moving towards a full solution to the eHealth-KD challenge, there are some fundamental obstacles that still need to be tackled.
+The most salient one is effectively capturing the interaction between entities and the semantic relations in which they appear.
+As we have learned from observing human annotators, they usually annotate simultaneously entities and relations.
+Furthermore, they do not follow the left-to-right natural order of the sentence, but rather annotate the most salient entities first~(e.g., the main Action and related Concepts) and then add the contextual relations and supporting entities.
+Althought it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with some reinforced learning approach.
+For this purpose, it could be interesting to analize not only the final annotated sentence but the individual annotation events that human annotators produce, including undoing previous annotations.
 
--- Hablar de la modelación de las entidades y relaciones como tareas separadas,
-la desventaja que puede representar eso porque los sistemas que han ganado hacen
-ambas cosas a la vez, o sea hay representación conjunta que es válida
-
--- Hablar de las relaciones como problema binario, que no tiene en cuenta que ciertas
-relaciones implican posiblemente la aparición de otras.
-
--- hablar de los 2 enfoques raros IXA y Vicomtech, que puede aportar cada uno. IXA que lo hacen por cada par de entidades, y se podría hacer para toda la oración a la vez, o al menos para todos los orígenes. Vicomtech que tienen problemas con que T5 alucina frases que no están en el texto, que si se podría restringir a output solamente lo que está en la oración original. Además que tienen que generar las mismas entidades varias veces, porque hay más relaciones que entidades, una representación más compacta que solo tenga las relaciones puede ayudar.
-
--- Hablar de que el orden en que el humano anota no es el mismo que un sistema,
-y que si se pudiera aprender algo de esto, dar con el dataset no solo las anotaciones
-sino en qué orden fueron realizadas.
-
--- Hablar de la necesidad de cambiar de tareas hacia algo que refleje el valor
-del conocimiento extraído, como question answering.
+The four editions of the eHealth-KD challenge have shown that knowledge discovery in natural language text is still an open and challenging problem.
+Detecting the most relevant entities and relations is but a first step in a hypothetical knowledge discovery system that could be used to intelligently explore the vast amount of information available in natural language.
+Moving up in this pipeline, the next natural step is to create semantic structures~(e.g., knowledge graphs) that integrate the entities and relations detected in a corpus of related sentences.
+This could enable using natural language queries that can be answered with precise factual information encoded in such a semantic structure.
+Future editions of the eHealth-KD challenge will focus on those types of problems, in an attempt to continue fostering research in the full problem of knowledge discovery in natural language.
 
 \section{Conclusions}\label{sec:conclusions}
 
