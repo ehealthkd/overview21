@@ -61,22 +61,22 @@ On the other hand, is becoming increasingly difficult to organise, categorise, c
 The ease of access to both publication and consumption of textual information is arguably one of the root causes of the increasingly worrying phenomenon of fake news.
 
 Staying up-to-date on information about topics of interest is crucial in technical or scientific domains.
-For this purpose, specialists rely on a combination of curated soruces (e.g., domain-specific repositories like arxiv, bioarxiv, semantic scholar) and technologies for search and recommendation (e.g., google scholar).
+For this purpose, specialists rely on a combination of curated sources (e.g., domain-specific repositories like arxiv, bioarxiv, semantic scholar) and technologies for search and recommendation (e.g., google scholar).
 These resources significantly improve the experience of collecting and consuming large amounts of relevant information on a specific topic.
 Tools like Connected Papers~\cite{} and Papers with Code~\cite{} are one step beyond the indexing of documents, providing summarised and structured representations of the content in a collection of documents.
 However, it remains an open problem to automatically combine, summarise, and present the relevant information in a collection of documents in a semantic structure~(e.g., a knowledge graph) that allows a specialist to quickly grasp the essential concepts of a specific knowledge field.
 
 A potential solution to this problem would require methods to automatically detect in natural language the most relevant concepts and the factual statements in which they are related, possibly normalise them into well-established taxonomies and classifications, and store them in computational data structures where they can linked with related concepts, e.g., knowledge graphs.
 The first step of this process, i.e., the detection of relevant concepts and semantic relations in text, is already a challenging computational task, given the complexity and variability of natural language.
-To encourage research and development in this area, several academic competitions have been organised through the years by organizations such as CLEF, SEMEVAL, and more recently, IBERLEF.
+To encourage research and development in this area, several academic competitions have been organised through the years by organisations such as CLEF, SEMEVAL, and more recently, IBERLEF.
 
 In this context, the eHealth Knowledge Discovery Challenge is designed to foster the development of automatic knowledge discovery systems for natural language sentences in a cross-domain and multi-lingual setting.
 Concretely, a token-level annotation model of 4 entities and 13 semantic relations is defined, and a corpus of more than 1500 sentences from different factual sources~(i.e., Spanish Medline articles, Spanish Wikinews articles, and English biomedical preprints related to COVID-19) is annotated.
 Two computational tasks are defined: the detection of multi-span, non-contiguous, and potentially overlapping named entities; and the detection of semantic relations between them.
-A shared annotation campaign was organized, where a total of 9 participants presented 10 different systems with varied levels of performance.
+A shared annotation campaign was organised, where a total of 9 participants presented 10 different systems with varied levels of performance.
 
 The eHealth-KD task focuses on cross-domain, multi-lingual and low-resource solutions. This setting presents a significant challenge to existing state-of-the-art methods, which often rely on large amounts of training data.
-A succesful approach to the eHealth-KD must leverage transfer learning across different domains and languages, since the vast majority of the training examples are provided in Spanish language and from the Medline domain, while only a small development set is available in the remaining settings.
+A successful approach to the eHealth-KD must leverage transfer learning across different domains and languages, since the vast majority of the training examples are provided in Spanish language and from the Medline domain, while only a small development set is available in the remaining settings.
 With this added complexity, we expect to encourage solutions that can be deployed in low-resource environments, where is unfeasible to train large language models over longs periods of time.
 
 The remaining of this paper is organized as follows.
@@ -237,7 +237,7 @@ A brief summary of each system follows:
 
   \paragraph{GuanZhengy} presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
 
-  \paragraph{IXA} models both substasks are sequence labeling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
+  \paragraph{IXA} models both substasks are sequence labelling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
 
   \paragraph{JAD} proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity~\cite{JAD2021}.
 
@@ -247,9 +247,9 @@ A brief summary of each system follows:
 
   \paragraph{uhKD4} models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings~\cite{uhKD42021}.
 
-  \paragraph{UH-MMM} also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation predction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
+  \paragraph{UH-MMM} also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation prediction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
 
-  \paragraph{Vicomtech} presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediciton~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, finetunned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
+  \paragraph{Vicomtech} presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediction~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, fine-tuned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
 
 As it can be seen in Table~\ref{tab:participants}, the predominant solution for feature extraction is using pre-trained language models such as BERT and its variants, although some approaches also include classic NLP features.
 In contrast with previous editions, the joint approach~(solving both subtasks simultaneously with a shared architecture) is used by more than half of the systems that tackle both subtasks.
@@ -292,12 +292,12 @@ This advantage seems to be mostly due to the strength of these solutions for sol
 
 As expected by the relative complexity of the tasks, results for subtask A are significantly better than for subtask B.
 However, neither subtask can be said to be fundamentally solved up to human performance.
-The human benchmark, estimated by inter-annotator agreement, is at least $10$ to $20$ percentual points above the best performing systems in both subtasks, with this gap being larger in subtask B.\todo{estimate human benchmark}
+The human benchmark, estimated by inter-annotator agreement, is at least $10$ to $20$ percent points above the best performing systems in both subtasks, with this gap being larger in subtask B.\todo{estimate human benchmark}
 
 The use of pre-trained language models seems to provide a significant advantage, taking into consideration the complexities of dealing with multiple domains and languages.
 By leveraging multi-lingual models, most systems are capable of dealing with English sentences even though there is little to no training data~(i.e., only 50 English sentences were annotated in the development).
 However, there is a significant gap in performance across domains and languages, as shown by Table~\ref{tab:models}.\todo{diferencias por dominio y lenguaje}
-This suggests that pre-trained models alone are insuficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
+This suggests that pre-trained models alone are insufficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
 
 Modelling both subtasks independently seems to be less effective than using some form of shared architecture.
 The three best performing systems exploit in some manner the interrelation between both subtasks, either by using a single architecture with separate outputs~(thus sharing a large part of the feature extraction model), or by reusing the same architecture in both subtasks.
@@ -321,8 +321,8 @@ Moving towards a full solution to the eHealth-KD challenge, there are some funda
 The most salient one is effectively capturing the interaction between entities and the semantic relations in which they appear.
 As we have learned from observing human annotators, they usually annotate simultaneously entities and relations.
 Furthermore, they do not follow the left-to-right natural order of the sentence, but rather annotate the most salient entities first~(e.g., the main Action and related Concepts) and then add the contextual relations and supporting entities.
-Althought it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with some reinforced learning approach.
-For this purpose, it could be interesting to analize not only the final annotated sentence but the individual annotation events that human annotators produce, including undoing previous annotations.
+Although it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with some reinforced learning approach.
+For this purpose, it could be interesting to analyse not only the final annotated sentence but the individual annotation events that human annotators produce, including undoing previous annotations.
 
 The four editions of the eHealth-KD challenge have shown that knowledge discovery in natural language text is still an open and challenging problem.
 Detecting the most relevant entities and relations is but a first step in a hypothetical knowledge discovery system that could be used to intelligently explore the vast amount of information available in natural language.
