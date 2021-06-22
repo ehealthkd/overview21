@@ -71,8 +71,8 @@ The first step of this process, i.e., the detection of relevant concepts and sem
 To encourage research and development in this area, several academic competitions have been organised through the years by organizations such as CLEF, SEMEVAL, and more recently, IBERLEF.
 
 In this context, the eHealth Knowledge Discovery Challenge is designed to foster the development of automatic knowledge discovery systems for natural language sentences in a cross-domain and multi-lingual setting.
-Concretely, a token-level annotation model of 4 entities and 13 semantic relations is defined, and a corpus of more than 1500 sentences from different factual sources~(i.e., Spanish Medline articles, Spanish Wikinews articles, and English biomedical preprints related to COVID-19) is annotated.
-Two computational tasks are defined: the detection of multi-span, non-contiguous, and potentially overlapping named entities; and the detection of semantic relations between them.
+Concretely, a token-level annotation model of 4 entities and 13 semantic relations is defined, and a corpus of more than 1900 sentences from different factual sources~(i.e., Spanish Medline articles, Spanish Wikinews articles, and English biomedical preprints related to COVID-19) is constructed.
+Based on this annotation model, two computational tasks are defined: the detection of multi-span, non-contiguous, and potentially overlapping named entities; and the detection of semantic relations between them.
 A shared annotation campaign was organized, where a total of 9 participants presented 10 different systems with varied levels of performance.
 
 The eHealth-KD task focuses on cross-domain, multi-lingual and low-resource solutions. This setting presents a significant challenge to existing state-of-the-art methods, which often rely on large amounts of training data.
@@ -280,24 +280,55 @@ This advantage seems to be mostly due to the strength of these solutions for sol
     uhKD4            & 0.422 & 0.485 & 0.374 & 0.527 & 0.517 & 0.537 & 0.317 & 0.556 & 0.222 \\
     UH-MMM           & 0.338 & 0.291 & 0.403 & 0.607 & 0.546 & 0.685 & 0.053 & 0.077 & 0.041 \\
     Codestrange      & 0.232 & 0.337 & 0.176 & 0.080 & 0.415 & 0.044 & 0.032 & 0.437 & 0.017 \\
-    \it baseline     & 0.232 & 0.337 & 0.176 & 0.306 & 0.350 & 0.271 & 0.032 & 0.437 & 0.017 \\
     JAD              & 0.109 & 0.234 & 0.071 & 0.262 & 0.315 & 0.224 & 0.007 & 0.375 & 0.003 \\
     GuanZhengyi      & -     & -     & -     & 0.334 & 0.520 & 0.245 & -     & -     & -     \\
     Maoqin           & -     & -     & -     & 0.173 & 0.271 & 0.127 & -     & -     & -     \\
+    \midrule
+    \it human        & 0.644 & 0.673 & 0.618 & 0.831 & 0.862 & 0.802 & 0.621 & 0.596 & 0.647 \\
+    \it baseline     & 0.232 & 0.337 & 0.176 & 0.306 & 0.350 & 0.271 & 0.032 & 0.437 & 0.017 \\
     \bottomrule
   \end{tabular}}
 
-  \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted.\label{tab:results}}
+  \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted. For comparative purpose, an estimated \textit{human} performance~(based on inter-annotator agreement) and a simple computational \textit{baseline} are also reported.\label{tab:results}}
 \end{table*}
 
 As expected by the relative complexity of the tasks, results for subtask A are significantly better than for subtask B.
 However, neither subtask can be said to be fundamentally solved up to human performance.
-The human benchmark, estimated by inter-annotator agreement, is at least $10$ to $20$ percentual points above the best performing systems in both subtasks, with this gap being larger in subtask B.\todo{estimate human benchmark}
+The human benchmark, estimated by inter-annotator agreement, is approximately $11.3$,
+$12.5$, and $19.1$ percent points above the best performing systems in each scenario, respectively.
+This indicates that there is still a significant margin for improvement, especially on the relation extraction subtask.
 
 The use of pre-trained language models seems to provide a significant advantage, taking into consideration the complexities of dealing with multiple domains and languages.
-By leveraging multi-lingual models, most systems are capable of dealing with English sentences even though there is little to no training data~(i.e., only 50 English sentences were annotated in the development).
-However, there is a significant gap in performance across domains and languages, as shown by Table~\ref{tab:models}.\todo{diferencias por dominio y lenguaje}
-This suggests that pre-trained models alone are insuficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
+By leveraging multi-lingual models, most systems are capable of dealing with English sentences even though there is little to no training data~(i.e., only 50 English sentences were provided in the development collection).
+However, there is a gap in performance across domains and languages, as shown by Table~\ref{tab:models}.
+Most participants have a better performance on the subset of the test collection that corresponds to the \textit{Medline} and \textit{Wikinews} sources, and a correspondingly worse performance on the \textit{CORD} subset.
+On average, performance on \textit{Medline}~(the most common source) is $25.2$ and $15.2$ percent points higher than on \textit{CORD}~(the least common source) for subtask A and B, respectively.
+This suggests that multilingual pre-trained models alone are insuficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
+
+\begin{table*}
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{l|rrrr|rrrr|rrrr}
+    \toprule
+    & \multicolumn{4}{c|}{Medline} & \multicolumn{4}{c|}{Wikinews} & \multicolumn{4}{c}{CORD} \\
+    & \multicolumn{2}{c}{Task A} & \multicolumn{2}{c|}{Task B} & \multicolumn{2}{c}{Task A} & \multicolumn{2}{c|}{Task B} & \multicolumn{2}{c}{Task A} & \multicolumn{2}{c}{Task B} \\
+    Team & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff \\
+    \midrule
+Vicomtech        & 0.843 &  0.156 & 0.467 & 0.093 & 0.794 & 0.106 & 0.478 &  0.104 & 0.576 & -0.111 & 0.256 & -0.118 \\
+PUCRJ-PUCPR-UFMG & 0.779 &  0.071 & 0.374 & 0.109 & 0.781 & 0.073 & 0.362 &  0.098 & 0.641 & -0.067 & 0.170 & -0.095 \\
+IXA              & 0.699 &  0.045 & 0.562 & 0.130 & 0.714 & 0.060 & 0.493 &  0.062 & 0.609 & -0.045 & 0.338 & -0.094 \\
+uhKD4            & 0.772 &  0.242 & 0.538 & 0.219 & 0.714 & 0.184 & 0.431 &  0.112 & 0.348 & -0.182 & 0.127 & -0.192 \\
+UH-MMM           & 0.692 &  0.081 & 0.158 & 0.104 & 0.695 & 0.083 & 0.061 &  0.006 & 0.538 & -0.073 & 0.014 & -0.041 \\
+Codestrange      & 0.177 &  0.096 & 0.138 & 0.105 & 0.124 & 0.042 & 0.008 & -0.025 & 0.017 & -0.065 & 0.000 & -0.033 \\
+JAD              & 0.238 & -0.025 & 0.036 & 0.028 & 0.243 & -0.02 & 0.000 & -0.007 & 0.280 &  0.017 & 0.000 & -0.007 \\
+GuanZhengyi      & 0.807 &  0.470 & 0.000 & 0.000 & 0.286 & -0.05 & 0.000 &  0.000 & 0.000 & -0.336 & 0.000 &  0.000 \\
+Maoqin           & 0.266 &  0.094 & 0.000 & 0.000 & 0.269 & 0.097 & 0.000 &  0.000 & 0.000 & -0.172 & 0.000 &  0.000 \\
+    \midrule
+    Average Diff &       &  0.136 &       & 0.087 &       & 0.063 &       &  0.038 &       & -0.114 &       & -0.064 \\
+    \bottomrule
+  \end{tabular}}
+  \caption{Individual results per domain in subtasks A and B. The \textit{Diff} column corresponds to the absolute difference between the presented $F_1$ and the aggregated $F_1$ on the corresponding scenario,
+  as reported in Table~\ref{tab:results}. A positive \textit{Diff} indicates that team had a correspondingly better result on that specific subset than in the overall corpus.\label{tab:models}}
+\end{table*}
 
 Modelling both subtasks independently seems to be less effective than using some form of shared architecture.
 The three best performing systems exploit in some manner the interrelation between both subtasks, either by using a single architecture with separate outputs~(thus sharing a large part of the feature extraction model), or by reusing the same architecture in both subtasks.
@@ -321,8 +352,8 @@ Moving towards a full solution to the eHealth-KD challenge, there are some funda
 The most salient one is effectively capturing the interaction between entities and the semantic relations in which they appear.
 As we have learned from observing human annotators, they usually annotate simultaneously entities and relations.
 Furthermore, they do not follow the left-to-right natural order of the sentence, but rather annotate the most salient entities first~(e.g., the main Action and related Concepts) and then add the contextual relations and supporting entities.
-Althought it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with some reinforced learning approach.
-For this purpose, it could be interesting to analize not only the final annotated sentence but the individual annotation events that human annotators produce, including undoing previous annotations.
+Althought it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with a reinforcement learning approach.
+For this purpose, it could be interesting to analize not only the final annotated sentence but the individual annotation events that human annotators produce, including the undoing previous annotations.
 
 The four editions of the eHealth-KD challenge have shown that knowledge discovery in natural language text is still an open and challenging problem.
 Detecting the most relevant entities and relations is but a first step in a hypothetical knowledge discovery system that could be used to intelligently explore the vast amount of information available in natural language.
