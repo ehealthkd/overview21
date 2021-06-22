@@ -79,7 +79,7 @@ The first step of this process, i.e., the detection of relevant concepts and sem
 To encourage research and development in this area, several academic competitions have been organised through the years by organisations such as CLEF, SEMEVAL, and more recently, IBERLEF.
 
 In this context, the eHealth Knowledge Discovery Challenge is designed to foster the development of automatic knowledge discovery systems for natural language sentences in a cross-domain and multi-lingual setting.
-Concretely, a token-level annotation model of 4 entities and 13 semantic relations is defined, and a corpus of more than 1500 sentences from different factual sources~(i.e., Spanish Medline articles, Spanish Wikinews articles, and English biomedical preprints related to COVID-19) is annotated.
+Concretely, a token-level annotation model of 4 entities and 13 semantic relations is defined, and a corpus of 1800 sentences from different factual sources~(i.e., Spanish Medline articles, Spanish Wikinews articles, and English biomedical preprints related to COVID-19) is annotated.
 Two computational tasks are defined: the detection of multi-span, non-contiguous, and potentially overlapping named entities; and the detection of semantic relations between them.
 A shared annotation campaign was organised, where a total of 9 participants presented 10 different systems with varied levels of performance.
 
@@ -205,7 +205,7 @@ Finally, a small set of sentences from scientific papers in the \textit{CORD-19}
             & Wikinews & Spanish & 75 \\
             & CORD & English & 150 \\
     \midrule
-    Total   &      &         & 1900 \\
+    Total   &      &         & 1800 \\
     \bottomrule
   \end{tabular}
   \caption{Composition of the corpus, highlighting resources from previous
@@ -368,6 +368,10 @@ This could enable using natural language queries that can be answered with preci
 Future editions of the eHealth-KD challenge will focus on those types of problems, in an attempt to continue fostering research in the full problem of knowledge discovery in natural language.
 
 \section{Conclusions}\label{sec:conclusions}
+
+The eHealth Knowledge Discovery Challenge, in its fourth edition, demonstrated that there is a growing interest in the NLP community, both Spanish-speaking and international, related to research in knowledge discovery in natural language.
+While the top performing solutions are all based on state-of-the-art neural architectures, there is still a large margin for improvement, especially regarding transfer learning to low-resource domains.
+New approaches not based on the standard NER pipeline seem promising, but still require further development before they can be applied successfully in such a challenging scenario.
 
 \section*{Acknowledgements}
 
