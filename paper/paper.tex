@@ -218,7 +218,7 @@ Finally, a small set of sentences from scientific papers in the \textit{CORD-19}
     \toprule
     \textbf{System} & \textbf{Features} & \textbf{Tasks} & \textbf{Task A} & \textbf{Task B} & \textbf{Multi-span} \\
     \midrule
-    Codestrange & 				 \\
+    Codestrange & Spacy & Only A & Sequence & - & Custom \\
     GuanZhengyi & BETO & Only A & Sequence & - & BIO \\
     IXA & ROBERTa & Sequential & Sequence & Sequence & BIO \\
     JAD & BERT & Joint & Token & Pairwise & Relation \\
@@ -240,8 +240,7 @@ who presented a variety of approaches clustered around deep learning architectur
 Table~\ref{tab:participants} summarises the main characteristics of each approach presented.
 A brief summary of each system follows:
 
-%-- Describir los sistemas
-  \paragraph{Codestrange} proposes
+  \paragraph{Codestrange} proposes a stadnard NER pipeline trained with the \texttt{spacy} library, modified to fit the eHealth-KD annotation model. They apply some preprocessing steps to deal with multi-token annotations, which are not natively handled by the tool.
 
   \paragraph{GuanZhengy} presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
 
