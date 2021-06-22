@@ -106,16 +106,16 @@ The goal of this subtask is to identify all the entities per document and their 
 
 \begin{description}
   \item[Concept:] indentifies a rel willevant term, concept, idea, in the knowledge domain of the sentence.
-  \item[Action:] indentifies a process or modification of other entities. It can be indicated by a verb or verbal construction, such as “afecta” (affects), but also by nouns, such as “exposición” (exposition), where it denotes the act of being exposed to the Sun, and “daños” (damages), where it denotes the act of damaging the skin. It can also be used to indicate non-verbal functional relations, such as “padre” (parent), etc.
-  \item[Predicate:] identifies a function or filter of another set of elements, which has a semantic label in the text, such as “mayores” (older), and is applied to an entity, such as “personas” (people) with some additional arguments such as “60 años” (60 years).
-  \item[Reference:] identifies a textual element that refers to an entity –of the same sentence or of different one–, which can be indicated by textual clues such as “esta”, “aquel”, etc.
+  \item[Action:] indentifies a process or modification of other entities. It can be indicated by a verb or verbal construction, such as “afecta” (affects), but also by nouns, such as “exposición” (exposition) and “daños” (damages).
+  \item[Predicate:] identifies a function or filter of another set of elements, which has a semantic label in the text, such as “mayores” (older), and is applied to an entity, such as “personas” (people) withsome additional arguments such as “60 años” (60 years).
+  \item[Reference:] identifies a textual element that refers to an entity --of the same sentence or of different one--, which can be indicated by textual clues such as “esta”, “aquel”, etc.
 \end{description}
 
 \subsection{Subtask B: Relation extraction}
 
 Subtask B continues from the output of Subtask A, by linking the entities detected and labelled in the input document. The purpose of this subtask is to recognize all relevant semantic relationships between the entities recognized. The semantic relations are divided in different categories:
 
-\paragraph{General relations (6)} are general-purpose relations between two concepts (it involves Concept, Action, Predicate, and Reference) that have a specific semantic. When any of these relations applies, it is preferred over a domain relation –tagging a key phrase as a link between two information units–, since their semantic is independent of any textual label:
+\paragraph{General relations (6)} are general-purpose relations between two entities that have a pre-defined semantic:
 
 \begin{description}
   \item[is-a:] indicates that one entity is a subtype, instance, or member of the class identified by the other.
@@ -126,26 +126,26 @@ Subtask B continues from the output of Subtask A, by linking the entities detect
   \item[entails:] indicates that the existence of one entity implies the existence or occurrence of another.
 \end{description}
 
-\paragraph{Contextual relations (3)} allow to refine an entity (it involves Concept, Action, Predicate, and Reference) by attaching modifiers. These are:
+\paragraph{Contextual relations (3)} allow to refine an entity by attaching modifiers:
 
 \begin{description}
-  \item[in-time:] to indicate that something exists, occurs or is confined to a time-frame, such as in “exposición” in-time “verano”.
+  \item[in-time:] to indicate that something exists, occurs or is confined to a time-frame.
   \item[in-place:] to indicate that something exists, occurs or is confined to a place or location.
-  \item[in-context:] to indicate a general context in which something happens, like a mode, manner, or state, such as “exposición” in-context “prolongada”.
+  \item[in-context:] to indicate a general context in which something happens, like a mode, manner, or state.
 \end{description}
 
 \paragraph{Action roles (2)} indicate which role play the entities related to an Action:
 
 \begin{description}
-  \item[subject:] indicates who performs the action, such as in “[el] asma afecta […]”.
-  \item[target:] indicates who receives the effect of the action, such as in “[…] afecta [las] vías respiratorias”. Actions can have several subjects and targets, in which case the semantic interpreted is that the union of the subjects performs the action over each of the targets.
+  \item[subject:] indicates who performs the action.
+  \item[target:] indicates who receives the effect of the action.
 \end{description}
 
 \paragraph{Predicate roles (2)} indicate which role play the entities related to a Predicate:
 
 \begin{description}
   \item[domain:] indicates the main entity on which the predicate applies.
-  \item[arg:] indicates an additional entity that specifies a value for the predicate to make sense. The exact semantic of this argument depends on the semantic of the predicate label, such as in “mayores [de] 60 años”, where the predicate label “mayores” indicates that “60 años” is a quantity, that restricts the minimum age for the predicate to be true.
+  \item[arg:] indicates an additional entity that specifies a value for the predicate to make sense.
 \end{description}
 
 \subsection{Evaluation}
@@ -262,11 +262,6 @@ The latter presents a text-to-text architecture which translates a raw sentence 
 
 \section{Results and Discussion}\label{sec:results}
 
-Table~\ref{tab:results} summarizes the main results obtained by all participants in the eHealth-KD 2021 Challenge.
-In the main scenario the best performing system was the joint architecture presented by Vicomtech, followed closely by a very similar architecture presented by PUCRJ-PUCPR-UFMG.
-Both approaches are based on the previous edition's winner, further confirming the hypothesis that using end-to-end architectures for solving both subtasks simultaneously outperforms task-specific architectures.
-This advantage seems to be mostly due to the strength of these solutions for solving subtask A, since in subtask B the best performing system is the sequence labelling architecture presented by IXA.
-
 \begin{table*}
   \resizebox{\textwidth}{!}{
   \begin{tabular}{l|ccc|ccc|ccc}
@@ -288,9 +283,13 @@ This advantage seems to be mostly due to the strength of these solutions for sol
     \it baseline     & 0.232 & 0.337 & 0.176 & 0.306 & 0.350 & 0.271 & 0.032 & 0.437 & 0.017 \\
     \bottomrule
   \end{tabular}}
+    \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted. For comparative purpose, an estimated \textit{human} performance~(based on inter-annotator agreement) and a simple computational \textit{baseline} are also reported.\label{tab:results}}
+  \end{table*}
 
-  \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted. For comparative purpose, an estimated \textit{human} performance~(based on inter-annotator agreement) and a simple computational \textit{baseline} are also reported.\label{tab:results}}
-\end{table*}
+Table~\ref{tab:results} summarizes the main results obtained by all participants in the eHealth-KD 2021 Challenge.
+In the main scenario the best performing system was the joint architecture presented by Vicomtech, followed closely by a very similar architecture presented by PUCRJ-PUCPR-UFMG.
+Both approaches are based on the previous edition's winner, further confirming the hypothesis that using end-to-end architectures for solving both subtasks simultaneously outperforms task-specific architectures.
+This advantage seems to be mostly due to the strength of these solutions for solving subtask A, since in subtask B the best performing system is the sequence labelling architecture presented by IXA.
 
 As expected by the relative complexity of the tasks, results for subtask A are significantly better than for subtask B.
 However, neither subtask can be said to be fundamentally solved up to human performance.
