@@ -236,7 +236,7 @@ who presented a variety of approaches clustered around deep learning architectur
 Table~\ref{tab:participants} summarises the main characteristics of each approach presented.
 A brief summary of each system follows:
 
-  \paragraph{Codestrange} proposes a stadnard NER pipeline trained with the \texttt{spacy} library, modified to fit the eHealth-KD annotation model. They apply some preprocessing steps to deal with multi-token annotations, which are not natively handled by the tool.
+  \paragraph{Codestrange} proposes a standard NER pipeline trained with the \texttt{spacy} library, modified to fit the eHealth-KD annotation model. They apply some preprocessing steps to deal with multi-token annotations, which are not handled automatically by the tool.
 
   \paragraph{GuanZhengy} presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
 
@@ -307,6 +307,8 @@ Most participants have a better performance on the subset of the test collection
 On average, performance on \textit{Medline}~(the most common source) is $25.2$ and $15.2$ percent points higher than on \textit{CORD}~(the least common source) for subtask A and B, respectively.
 This suggests that multilingual pre-trained models alone are insufficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
 
+\todo[inline]{Comentar GuanZengyi con respecto a la complejidad del transfer learning...}
+
 \begin{table*}[htb]
   \resizebox{\textwidth}{!}{
   \begin{tabular}{l|rrrr|rrrr|rrrr}
@@ -315,9 +317,9 @@ This suggests that multilingual pre-trained models alone are insufficient as an 
     & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c}{\textbf{Task B}} \\
     \textbf{Team} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} \\
     \midrule
-Vicomtech        & 0.843 &  0.156 & 0.467 & 0.093 & 0.794 & 0.106 & 0.478 &  0.104 & 0.576 & -0.111 & 0.256 & -0.118 \\
-PUCRJ-PUCPR-UFMG & 0.779 &  0.071 & 0.374 & 0.109 & 0.781 & 0.073 & 0.362 &  0.098 & 0.641 & -0.067 & 0.170 & -0.095 \\
-IXA              & 0.699 &  0.045 & 0.562 & 0.130 & 0.714 & 0.060 & 0.493 &  0.062 & 0.609 & -0.045 & 0.338 & -0.094 \\
+Vicomtech        & \bf 0.843 &  0.156 & 0.467 & 0.093 & \bf 0.794 & 0.106 & 0.478 &  0.104 & 0.576 & -0.111 & 0.256 & -0.118 \\
+PUCRJ-PUCPR-UFMG & 0.779 &  0.071 & 0.374 & 0.109 & 0.781 & 0.073 & 0.362 &  0.098 & \bf 0.641 & -0.067 & 0.170 & -0.095 \\
+IXA              & 0.699 &  0.045 & \bf 0.562 & 0.130 & 0.714 & 0.060 & \bf 0.493 &  0.062 & 0.609 & -0.045 & \bf 0.338 & -0.094 \\
 uhKD4            & 0.772 &  0.242 & 0.538 & 0.219 & 0.714 & 0.184 & 0.431 &  0.112 & 0.348 & -0.182 & 0.127 & -0.192 \\
 UH-MMM           & 0.692 &  0.081 & 0.158 & 0.104 & 0.695 & 0.083 & 0.061 &  0.006 & 0.538 & -0.073 & 0.014 & -0.041 \\
 Codestrange      & 0.177 &  0.096 & 0.138 & 0.105 & 0.124 & 0.042 & 0.008 & -0.025 & 0.017 & -0.065 & 0.000 & -0.033 \\
@@ -325,12 +327,14 @@ JAD              & 0.238 & -0.025 & 0.036 & 0.028 & 0.243 & -0.02 & 0.000 & -0.0
 GuanZhengyi      & 0.807 &  0.470 & 0.000 & 0.000 & 0.286 & -0.05 & 0.000 &  0.000 & 0.000 & -0.336 & 0.000 &  0.000 \\
 Maoqin           & 0.266 &  0.094 & 0.000 & 0.000 & 0.269 & 0.097 & 0.000 &  0.000 & 0.000 & -0.172 & 0.000 &  0.000 \\
     \midrule
-    Mean difference &       &  0.136 &       & 0.087 &       & 0.063 &       &  0.038 &       & -0.114 &       & -0.064 \\
+    Mean difference &       & 0.136 &       & 0.087 &       & 0.063 &       & 0.038 &       & -0.114 &       & -0.064 \\
     \bottomrule
   \end{tabular}}
   \caption{Individual results per domain in subtasks A and B. The \textit{Diff} column corresponds to the absolute difference between the presented $F_1$ and the aggregated $F_1$ on the corresponding scenario,
   as reported in Table~\ref{tab:results}. A positive \textit{Diff} indicates that team had a correspondingly better result on that specific subset than in the overall corpus.\label{tab:models}}
 \end{table*}
+
+\todo[inline]{Grafica de lineas para ver la evolucion del transferlearning entre diminios}
 
 Modelling both subtasks independently seems to be less effective than using some form of shared architecture.
 The three best performing systems exploit in some manner the interrelation between both subtasks, either by using a single architecture with separate outputs~(thus sharing a large part of the feature extraction model), or by reusing the same architecture in both subtasks.
@@ -354,8 +358,8 @@ Moving towards a full solution to the eHealth-KD challenge, there are some funda
 The most salient one is effectively capturing the interaction between entities and the semantic relations in which they appear.
 As we have learned from observing human annotators, they usually annotate simultaneously entities and relations.
 Furthermore, they do not follow the left-to-right natural order of the sentence, but rather annotate the most salient entities first~(e.g., the main Action and related Concepts) and then add the contextual relations and supporting entities.
-Althought it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with a reinforcement learning approach.
-For this purpose, it could be interesting to analize not only the final annotated sentence but the individual annotation events that human annotators produce, including the undoing previous annotations.
+Although it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with a reinforcement learning approach.
+For this purpose, it could be interesting to analyse not only the final annotated sentence but the individual annotation events that human annotators produce, including the undoing previous annotations.
 
 The four editions of the eHealth-KD challenge have shown that knowledge discovery in natural language text is still an open and challenging problem.
 Detecting the most relevant entities and relations is but a first step in a hypothetical knowledge discovery system that could be used to intelligently explore the vast amount of information available in natural language.
@@ -363,13 +367,18 @@ Moving up in this pipeline, the next natural step is to create semantic structur
 This could enable using natural language queries that can be answered with precise factual information encoded in such a semantic structure.
 Future editions of the eHealth-KD challenge will focus on those types of problems, in an attempt to continue fostering research in the full problem of knowledge discovery in natural language.
 
+\todo[inline]{Grafica de dispersion dificultad para identificar cada tipo de etiqueta}
+
 \section{Conclusions}\label{sec:conclusions}
 
 The eHealth Knowledge Discovery Challenge, in its fourth edition, demonstrated that there is a growing interest in the NLP community, both Spanish-speaking and international, related to research in knowledge discovery in natural language.
 While the top performing solutions are all based on state-of-the-art neural architectures, there is still a large margin for improvement, especially regarding transfer learning to low-resource domains.
 New approaches not based on the standard NER pipeline seem promising, but still require further development before they can be applied successfully in such a challenging scenario.
 
+\todo[inline]{Hablar del aporte de la tarea}
+
 \section*{Acknowledgements}
+This research has been supported by a Carolina Foundation grant in agreement with University of Alicante and University of Havana. Moreover, the research has been partially funded by the University of Alicante and the University of Havana, the Generalitat Valenciana (\textit{Conselleria d’Educació, Investigació, Cultura i Esport}) and the Spanish Government through the projects LIVING-LANG (RTI2018-094653-B-C22), INTEGER (RTI2018-094649-B-I00)  and SIIA (PROMETEO/2018/089, PROMETEU/2018/089). Additionally, it has been backed by the work of both COST Actions: \texttt{CA19134} -- \textit{``Distributed Knowledge Graphs''} and \texttt{CA19142} -- \textit{``Leading Platform for European Citizens, Industries, Academia and Policymakers in Media Accessibility''}.
 
 \bibliographystyle{fullname}
 \bibliography{bibliography}
