@@ -97,7 +97,7 @@ The eHealth-KD challenge consists on the automatic sentence-level annotation
 of multi-token entities and binary relations among them.
 A custom annotation model has been defined, comprising 4 entity types and 13 relations,
 that attempts to capture a large part of factual semantics in technical documents,
-including enciclopedias, news, and scientific papers. The annotation model is explained in detail in \namecite{piad2019general}. Figure~\ref{fig:model} shows an illustrative example of the annotation model in three Spanish sentences.
+including encyclopedias, news, and scientific papers. The annotation model is explained in detail in \namecite{piad2019general}. Figure~\ref{fig:model} shows an illustrative example of the annotation model in three Spanish sentences.
 The challenge has been divided into two different subtasks: entity recognition and relation extraction.
 
 \subsection{Subtask A: Entity recognition}
@@ -105,15 +105,15 @@ The challenge has been divided into two different subtasks: entity recognition a
 The goal of this subtask is to identify all the entities per document and their types. These entities are all the relevant terms (single word or multiple words) that represent semantically important elements in a sentence. Entities always consist of one or more complete words (i.e., not a prefix or a suffix of a word), and never include any surrounding punctuation symbols, parenthesis, etc. There are four types for entities:
 
 \begin{description}
-  \item[Concept:] indentifies a rel willevant term, concept, idea, in the knowledge domain of the sentence.
-  \item[Action:] indentifies a process or modification of other entities. It can be indicated by a verb or verbal construction, such as “afecta” (affects), but also by nouns, such as “exposición” (exposition) and “daños” (damages).
+  \item[Concept:] identifies a rel willevant term, concept, idea, in the knowledge domain of the sentence.
+  \item[Action:] identifies a process or modification of other entities. It can be indicated by a verb or verbal construction, such as “afecta” (affects), but also by nouns, such as “exposición” (exposition) and “daños” (damages).
   \item[Predicate:] identifies a function or filter of another set of elements, which has a semantic label in the text, such as “mayores” (older), and is applied to an entity, such as “personas” (people) withsome additional arguments such as “60 años” (60 years).
   \item[Reference:] identifies a textual element that refers to an entity --of the same sentence or of different one--, which can be indicated by textual clues such as “esta”, “aquel”, etc.
 \end{description}
 
 \subsection{Subtask B: Relation extraction}
 
-Subtask B continues from the output of Subtask A, by linking the entities detected and labelled in the input document. The purpose of this subtask is to recognize all relevant semantic relationships between the entities recognized. The semantic relations are divided in different categories:
+Subtask B continues from the output of Subtask A, by linking the entities detected and labelled in the input document. The purpose of this subtask is to recognise all relevant semantic relationships between the entities recognised. The semantic relations are divided in different categories:
 
 \paragraph{General relations (6)} are general-purpose relations between two entities that have a pre-defined semantic:
 
@@ -171,15 +171,15 @@ sentences taken from previous challenges and other resources,
 and newly annotated sentences.
 The corpus is divided into three collections: training, development, and testing.
 All collections contain sentences extracted from MedlinePlus, Wikinews, and the CORD-19 corpus, related with health topics, but showing a significant variety in terms of format and structure.
-Furthermore, the majority of sentences are in Spanish, but a small set of English sentences is also included, to evaluate generalization across domains.
+Furthermore, the majority of sentences are in Spanish, but a small set of English sentences is also included, to evaluate generalisation across domains.
 
-In the training collection, each sentence is labeled with its corresponding domain and language (Spanish or English), so that participants can potentially fine-tune different models for each domain/language and learn to identify them in the text.
+In the training collection, each sentence is labelled with its corresponding domain and language (Spanish or English), so that participants can potentially fine-tune different models for each domain/language and learn to identify them in the text.
 In the development collection, sentences are from all different sources and no labelling is provided, so that participants can evaluate their systems in a similar environment to the testing set.
 In the testing set, a large number of unlabelled sentences is added along with a small batch of labelled sentences. This serves to discourage participants from manually labelling the test set.
 
-As in previous edition, the corpus for eHealth-KD 2021 is based mostly on text extracted from MedlinePlus sources, plus additional resources.
-First, the same corpus used in the 2020 edition will be provided for training and development, while a new set of previously unlabelled sentences will be manually annotated and used for the test collection. Additionally, health-related news sourced from Wikinews will be also provided for training and development.
-Finally, a small set of sentences from scientific papers in the CORD-19 corpus (in English language) are selected, annotated, and distributed in the development, and testing collections. Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
+As in previous edition, the corpus for eHealth-KD 2021 is based mostly on text extracted from \textit{Medline} sources, plus additional resources.
+First, the same corpus used in the 2020 edition will be provided for training and development, while a new set of previously unlabelled sentences will be manually annotated and used for the test collection. Additionally, health-related news sourced from \textit{Wikinews} will be also provided for training and development.
+Finally, a small set of sentences from scientific papers in the \textit{CORD-19} corpus (in English language) are selected, annotated, and distributed in the development, and testing collections. Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
 
 \begin{table}
   \begin{tabular}{lllr}
@@ -208,7 +208,7 @@ Finally, a small set of sentences from scientific papers in the CORD-19 corpus (
   \centering
   \begin{tabularx}{\textwidth}{lXllll}
     \toprule
-    System & Features & Tasks & Subtask A & Subtask B & Multi-span \\
+    \textbf{System} & \textbf{Features} & \textbf{Tasks} & \textbf{Task A} & \textbf{Task B} & \textbf{Multi-span} \\
     \midrule
     Codestrange & 				 \\
     GuanZhengyi & BETO & Only A & Sequence & - & BIO \\
@@ -286,7 +286,7 @@ The latter presents a text-to-text architecture which translates a raw sentence 
     \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted. For comparative purpose, an estimated \textit{human} performance~(based on inter-annotator agreement) and a simple computational \textit{baseline} are also reported.\label{tab:results}}
   \end{table*}
 
-Table~\ref{tab:results} summarizes the main results obtained by all participants in the eHealth-KD 2021 Challenge.
+Table~\ref{tab:results} summarises the main results obtained by all participants in the eHealth-KD 2021 Challenge.
 In the main scenario the best performing system was the joint architecture presented by Vicomtech, followed closely by a very similar architecture presented by PUCRJ-PUCPR-UFMG.
 Both approaches are based on the previous edition's winner, further confirming the hypothesis that using end-to-end architectures for solving both subtasks simultaneously outperforms task-specific architectures.
 This advantage seems to be mostly due to the strength of these solutions for solving subtask A, since in subtask B the best performing system is the sequence labelling architecture presented by IXA.
@@ -302,15 +302,15 @@ By leveraging multi-lingual models, most systems are capable of dealing with Eng
 However, there is a gap in performance across domains and languages, as shown by Table~\ref{tab:models}.
 Most participants have a better performance on the subset of the test collection that corresponds to the \textit{Medline} and \textit{Wikinews} sources, and a correspondingly worse performance on the \textit{CORD} subset.
 On average, performance on \textit{Medline}~(the most common source) is $25.2$ and $15.2$ percent points higher than on \textit{CORD}~(the least common source) for subtask A and B, respectively.
-This suggests that multilingual pre-trained models alone are insuficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
+This suggests that multilingual pre-trained models alone are insufficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
 
 \begin{table*}
   \resizebox{\textwidth}{!}{
   \begin{tabular}{l|rrrr|rrrr|rrrr}
     \toprule
-    & \multicolumn{4}{c|}{Medline} & \multicolumn{4}{c|}{Wikinews} & \multicolumn{4}{c}{CORD} \\
-    & \multicolumn{2}{c}{Task A} & \multicolumn{2}{c|}{Task B} & \multicolumn{2}{c}{Task A} & \multicolumn{2}{c|}{Task B} & \multicolumn{2}{c}{Task A} & \multicolumn{2}{c}{Task B} \\
-    Team & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff & $F_1$ & Diff \\
+    & \multicolumn{4}{c|}{\textit{Medline}} & \multicolumn{4}{c|}{\textit{Wikinews}} & \multicolumn{4}{c}{\textit{CORD}} \\
+    & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c}{\textbf{Task B}} \\
+    \textbf{Team} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} \\
     \midrule
 Vicomtech        & 0.843 &  0.156 & 0.467 & 0.093 & 0.794 & 0.106 & 0.478 &  0.104 & 0.576 & -0.111 & 0.256 & -0.118 \\
 PUCRJ-PUCPR-UFMG & 0.779 &  0.071 & 0.374 & 0.109 & 0.781 & 0.073 & 0.362 &  0.098 & 0.641 & -0.067 & 0.170 & -0.095 \\
@@ -322,7 +322,7 @@ JAD              & 0.238 & -0.025 & 0.036 & 0.028 & 0.243 & -0.02 & 0.000 & -0.0
 GuanZhengyi      & 0.807 &  0.470 & 0.000 & 0.000 & 0.286 & -0.05 & 0.000 &  0.000 & 0.000 & -0.336 & 0.000 &  0.000 \\
 Maoqin           & 0.266 &  0.094 & 0.000 & 0.000 & 0.269 & 0.097 & 0.000 &  0.000 & 0.000 & -0.172 & 0.000 &  0.000 \\
     \midrule
-    Average Diff &       &  0.136 &       & 0.087 &       & 0.063 &       &  0.038 &       & -0.114 &       & -0.064 \\
+    Mean difference &       &  0.136 &       & 0.087 &       & 0.063 &       &  0.038 &       & -0.114 &       & -0.064 \\
     \bottomrule
   \end{tabular}}
   \caption{Individual results per domain in subtasks A and B. The \textit{Diff} column corresponds to the absolute difference between the presented $F_1$ and the aggregated $F_1$ on the corresponding scenario,
