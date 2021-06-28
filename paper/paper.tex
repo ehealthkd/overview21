@@ -6,6 +6,8 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{todonotes}
+\usepackage{url}
+
 % \usepackage[spanish,es-nosectiondot, es-tabla, es-noindentfirst, es-nolists]{babel}
 
 \input epsf
@@ -37,7 +39,7 @@ $^2$Department of Language and Computing Systems, University of Alicante, Spain\
 
 \seplnkey{Named Entity Recognition, Relation Extraction, Knowledge Discovery, Challenge}
 
-\seplnabstract{This paper summarises the eHealth Knowledge Discovery Challenge hosted at IberLEF 2021. The task, resources, and participating systems are described. The main results are highlighted and discussed. The best performing systems are analysed, and recommendation for future research are presented.}
+\seplnabstract{This paper summarises the eHealth Knowledge Discovery Challenge hosted at IberLEF 2021. We describe the task, resources, and participating systems, highlighting and discussing the main results achieved in the challenge. We analyse the best performing systems and present recommendations for future research.}
 
 \firstpageno{1}
 
@@ -176,6 +178,7 @@ and newly annotated sentences.
 The corpus is divided into three collections: training, development, and testing.
 All collections contain sentences extracted from MedlinePlus, Wikinews, and the CORD-19 corpus, related with health topics, but showing a significant variety in terms of format and structure.
 Furthermore, the majority of sentences are in Spanish, but a small set of English sentences is also included, to evaluate generalisation across domains.
+The corpus with both annotated files in ANN format and ready-to-use files for training and evaluation is available online\footnote{\url{https://github.com/ehealthkd/corpora}}.
 
 In the training collection, each sentence is labelled with its corresponding domain and language (Spanish or English), so that participants can potentially fine-tune different models for each domain/language and learn to identify them in the text.
 In the development collection, sentences are from all different sources and no labelling is provided, so that participants can evaluate their systems in a similar environment to the testing set.
@@ -183,47 +186,47 @@ In the testing set, a large number of unlabelled sentences is added along with a
 
 As in previous edition, the corpus for eHealth-KD 2021 is based mostly on text extracted from \textit{Medline} sources, plus additional resources.
 First, the same corpus used in the 2020 edition will be provided for training and development, while a new set of previously unlabelled sentences will be manually annotated and used for the test collection. Additionally, health-related news sourced from \textit{Wikinews} will be also provided for training and development.
-Finally, a small set of sentences from scientific papers in the \textit{CORD-19} corpus (in English language) are selected, annotated, and distributed in the development, and testing collections. Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}\footnote{\url{https://ehealthkd.github.io/2021/resources}}.
+Finally, a small set of sentences from scientific papers in the \textit{CORD-19} corpus (in English language) are selected, annotated, and distributed in the development, and testing collections. Overall, the composition of the corpus is presented in Table~\ref{tab:corpus}.
 
 \begin{table}
   \begin{tabular}{lllr}
     \toprule
     \textbf{Collection} & \textbf{Source} & \textbf{Language} & \textbf{Size} \\
     \midrule
-    Training & Medline & Spanish & 1200 \\
-             & Wikinews & Spanish & 300 \\
+    Training            & Medline         & Spanish           & 1200          \\
+                        & Wikinews        & Spanish           & 300           \\
     \midrule
-    Develop & Medline & Spanish & 25 \\
-            & Wikinews & Spanish & 25 \\
-            & CORD & English & 50 \\
+    Develop             & Medline         & Spanish           & 25            \\
+                        & Wikinews        & Spanish           & 25            \\
+                        & CORD            & English           & 50            \\
     \midrule
-    Testing & Medline & Spanish & 75 \\
-            & Wikinews & Spanish & 75 \\
-            & CORD & English & 150 \\
+    Testing             & Medline         & Spanish           & 75            \\
+                        & Wikinews        & Spanish           & 75            \\
+                        & CORD            & English           & 150           \\
     \midrule
-    Total   &      &         & 1800 \\
+    Total               &                 &                   & 1800          \\
     \bottomrule
   \end{tabular}
   \caption{Composition of the corpus, highlighting resources from previous
-  challenges and newly annotated sentences.\label{tab:corpus}}
+    challenges and newly annotated sentences.\label{tab:corpus}}
 \end{table}
 
 \begin{table*}[htb]
   \centering
   \begin{tabularx}{\textwidth}{lXllll}
     \toprule
-    \textbf{System} & \textbf{Features} & \textbf{Tasks} & \textbf{Task A} & \textbf{Task B} & \textbf{Multi-span} \\
+    \textbf{System}   & \textbf{Features}                          & \textbf{Tasks} & \textbf{Task A} & \textbf{Task B} & \textbf{Multi-span} \\
     \midrule
-    Codestrange & Spacy & Only A & Sequence & - & Custom \\
-    GuanZhengyi & BETO & Only A & Sequence & - & BIO \\
-    IXA & ROBERTa & Sequential & Sequence & Sequence & BIO \\
-    JAD & BERT & Joint & Token & Pairwise & Relation \\
-    Maoqin & BERT & Only A & Sequence & - & BIO \\
-    PUCRJ-PUCPR-UFMG & BERT & Joint & Sequence & Pairwise & BIO \\
-    uhKD4 & Word2vec POS-tag Character Position & Sequential & Sequence & Pairwise & BILOUV \\
-    UH-MMM & BERT FastText POS-tag Dependency Character & Sequential & Sequence & Pairwise & BILOUV \\
-    Vicomtech Joint & BERT & Joint & Sequence & Pairwise & BIO \\
-    Vicomtech Seq2Seq & T5 & Joint & Text2text & Text2text & Text \\
+    Codestrange       & Spacy                                      & Only A         & Sequence        & -               & Custom              \\
+    GuanZhengyi       & BETO                                       & Only A         & Sequence        & -               & BIO                 \\
+    IXA               & ROBERTa                                    & Sequential     & Sequence        & Sequence        & BIO                 \\
+    JAD               & BERT                                       & Joint          & Token           & Pairwise        & Relation            \\
+    Maoqin            & BERT                                       & Only A         & Sequence        & -               & BIO                 \\
+    PUCRJ-PUCPR-UFMG  & BERT                                       & Joint          & Sequence        & Pairwise        & BIO                 \\
+    uhKD4             & Word2vec POS-tag Character Position        & Sequential     & Sequence        & Pairwise        & BILOUV              \\
+    UH-MMM            & BERT FastText POS-tag Dependency Character & Sequential     & Sequence        & Pairwise        & BILOUV              \\
+    Vicomtech Joint   & BERT                                       & Joint          & Sequence        & Pairwise        & BIO                 \\
+    Vicomtech Seq2Seq & T5                                         & Joint          & Text2text       & Text2text       & Text                \\
     \bottomrule
   \end{tabularx}
   \caption{Summary of the approaches presented at the eHealth-KD Challenge.\label{tab:participants}}
@@ -236,23 +239,49 @@ who presented a variety of approaches clustered around deep learning architectur
 Table~\ref{tab:participants} summarises the main characteristics of each approach presented.
 A brief summary of each system follows:
 
-  \paragraph{Codestrange} proposes a standard NER pipeline trained with the \texttt{spacy} library, modified to fit the eHealth-KD annotation model. They apply some preprocessing steps to deal with multi-token annotations, which are not handled automatically by the tool.
+\paragraph{Codestrange} proposes a standard NER pipeline trained with the \texttt{spacy} library, modified to fit the eHealth-KD annotation model. They apply some preprocessing steps to deal with multi-token annotations, which are not handled automatically by the tool.
 
-  \paragraph{GuanZhengy} presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
+\paragraph{GuanZhengy} presents a traditional NER architecture for Subtask A, based on contextual embeddings from a BETO pre-trained language model, and a combination of Convolutional, Bi-LSTM, and CRF layers for decoding BIO tags~\cite{GuanZhengyi2021}.
 
-  \paragraph{IXA} models both substasks are sequence labelling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
+\paragraph{IXA} models both substasks are sequence labelling problems encoded with a BIO system and using a pre-trained XLM-RoBERTa language model. Subtask A is solved with a standard NER architecture. For Subtask B, they solve a sequence labelling problem for each pair of entities, where tags correspond to relation labels~\cite{edgarandres2021}.
 
-  \paragraph{JAD} proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity~\cite{JAD2021}.
+\paragraph{JAD} proposes a single model based on BERT pre-trained embeddings that jointly outputs entity labels~(at token level) and pairwise relation labels. To deal with multi-span entities, they add a virtual relation that links tokens from the same entity~\cite{JAD2021}.
 
-  \paragraph{Maoquin} presents a traditional NER architecture based on BERT pre-trained embeddings and BIO tags for Subtask A, combined with Bi-LSTM and CRF layers~\cite{Maoqin2021}.
+\paragraph{Maoquin} presents a traditional NER architecture based on BERT pre-trained embeddings and BIO tags for Subtask A, combined with Bi-LSTM and CRF layers~\cite{Maoqin2021}.
 
-  \paragraph{PUCRJ-PUCPR-UFMG} proposes a joint model that outputs token labels~(modelled as a sequence labelling problem) and pairwise relation labels, based on BERT pre-trained embeddings as the main feature~\cite{lucas2021}.
+\paragraph{PUCRJ-PUCPR-UFMG} proposes a joint model that outputs token labels~(modelled as a sequence labelling problem) and pairwise relation labels, based on BERT pre-trained embeddings as the main feature~\cite{lucas2021}.
 
-  \paragraph{uhKD4} models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings~\cite{uhKD42021}.
+\paragraph{uhKD4} models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As features, they employ a variety of syntactic characteristics~(POS-tags, character embeddings, positional embeddings) as well as word2vec embeddings~\cite{uhKD42021}.
 
-  \paragraph{UH-MMM} also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation prediction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
+\paragraph{UH-MMM} also models both subtasks sequentially, using a standard NER architecture with BILOUV encoding for Subtask A and a pairwise classification model for Subtask B. As a key characteristic, they encode the shortest dependency path between two entities for the relation prediction. They also compare several different embeddings, including health-specific and general-purpose approaches~\cite{uhmmm2021}.
 
-  \paragraph{Vicomtech} presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediction~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, fine-tuned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
+\paragraph{Vicomtech} presents two different models. The first consists of a joint architecture for sequence labelling~(Subtask A) and pairwise relation prediction~(Subtask B) based on BERT pre-trained embeddings. The second model is a text-to-text architecture, based on a T5 model, fine-tuned on a problem-specific encoding of the entities and relations that solves both subtasks in a single pass~\cite{vicomtech2021}.
+
+
+
+\begin{table*}[htb]
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|ccc|ccc|ccc}
+      \toprule
+                       & \multicolumn{3}{c|}{\textbf{Main}} & \multicolumn{3}{c|}{\textbf{Task A}} & \multicolumn{3}{c}{\textbf{Task B}}                                                                         \\
+      \textbf{Team}    & $F_1$                              & $P$                                  & $R$                                 & $F_1$     & $P$       & $R$       & $F_1$     & $P$       & $R$       \\
+      \midrule
+      Vicomtech        & \bf 0.531                          & 0.540                                & 0.534                               & 0.684     & 0.699     & \bf 0.747 & 0.371     & \bf 0.541 & 0.283     \\
+      PUCRJ-PUCPR-UFMG & 0.528                              & \bf 0.568                            & 0.502                               & \bf 0.706 & \bf 0.714 & 0.697     & 0.263     & 0.366     & 0.205     \\
+      IXA              & 0.498                              & 0.464                                & \bf 0.538                           & 0.653     & 0.613     & 0.698     & \bf 0.430 & 0.453     & \bf 0.409 \\
+      uhKD4            & 0.422                              & 0.485                                & 0.374                               & 0.527     & 0.517     & 0.537     & 0.317     & 0.556     & 0.222     \\
+      UH-MMM           & 0.338                              & 0.291                                & 0.403                               & 0.607     & 0.546     & 0.685     & 0.053     & 0.077     & 0.041     \\
+      Codestrange      & 0.232                              & 0.337                                & 0.176                               & 0.080     & 0.415     & 0.044     & 0.032     & 0.437     & 0.017     \\
+      JAD              & 0.109                              & 0.234                                & 0.071                               & 0.262     & 0.315     & 0.224     & 0.007     & 0.375     & 0.003     \\
+      GuanZhengyi      & -                                  & -                                    & -                                   & 0.334     & 0.520     & 0.245     & -         & -         & -         \\
+      Maoqin           & -                                  & -                                    & -                                   & 0.173     & 0.271     & 0.127     & -         & -         & -         \\
+      \midrule
+      \it human        & 0.644                              & 0.673                                & 0.618                               & 0.831     & 0.862     & 0.802     & 0.621     & 0.596     & 0.647     \\
+      \it baseline     & 0.232                              & 0.337                                & 0.176                               & 0.306     & 0.350     & 0.271     & 0.032     & 0.437     & 0.017     \\
+      \bottomrule
+    \end{tabular}}
+  \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted. For comparative purpose, an estimated \textit{human} performance~(based on inter-annotator agreement) and a simple computational \textit{baseline} are also reported.\label{tab:results}}
+\end{table*}
 
 As it can be seen in Table~\ref{tab:participants}, the predominant solution for feature extraction is using pre-trained language models such as BERT and its variants, although some approaches also include classic NLP features.
 In contrast with previous editions, the joint approach~(solving both subtasks simultaneously with a shared architecture) is used by more than half of the systems that tackle both subtasks.
@@ -267,27 +296,30 @@ The latter presents a text-to-text architecture which translates a raw sentence 
 
 \begin{table*}[htb]
   \resizebox{\textwidth}{!}{
-  \begin{tabular}{l|ccc|ccc|ccc}
-    \toprule
-    & \multicolumn{3}{c|}{\textbf{Main}} & \multicolumn{3}{c|}{\textbf{Task A}} & \multicolumn{3}{c}{\textbf{Task B}} \\
-    \textbf{Team}    & $F_1$ & $P$   & $R$   & $F_1$ & $P$   & $R$   & $F_1$ & $P$   & $R$ \\
-    \midrule
-    Vicomtech        & \bf 0.531 & 0.540 & 0.534 & 0.684 & 0.699 & \bf 0.747 & 0.371 & \bf 0.541 & 0.283 \\
-    PUCRJ-PUCPR-UFMG & 0.528 & \bf 0.568 & 0.502 & \bf 0.706 & \bf 0.714 & 0.697 & 0.263 & 0.366 & 0.205 \\
-    IXA              & 0.498 & 0.464 & \bf 0.538 & 0.653 & 0.613 & 0.698 & \bf 0.430 & 0.453 & \bf 0.409 \\
-    uhKD4            & 0.422 & 0.485 & 0.374 & 0.527 & 0.517 & 0.537 & 0.317 & 0.556 & 0.222 \\
-    UH-MMM           & 0.338 & 0.291 & 0.403 & 0.607 & 0.546 & 0.685 & 0.053 & 0.077 & 0.041 \\
-    Codestrange      & 0.232 & 0.337 & 0.176 & 0.080 & 0.415 & 0.044 & 0.032 & 0.437 & 0.017 \\
-    JAD              & 0.109 & 0.234 & 0.071 & 0.262 & 0.315 & 0.224 & 0.007 & 0.375 & 0.003 \\
-    GuanZhengyi      & -     & -     & -     & 0.334 & 0.520 & 0.245 & -     & -     & -     \\
-    Maoqin           & -     & -     & -     & 0.173 & 0.271 & 0.127 & -     & -     & -     \\
-    \midrule
-    \it human        & 0.644 & 0.673 & 0.618 & 0.831 & 0.862 & 0.802 & 0.621 & 0.596 & 0.647 \\
-    \it baseline     & 0.232 & 0.337 & 0.176 & 0.306 & 0.350 & 0.271 & 0.032 & 0.437 & 0.017 \\
-    \bottomrule
-  \end{tabular}}
-    \caption{Summary of results in the three evaluation scenarios of the eHealth-KD Challenge. The top result in every metric is highlighted. For comparative purpose, an estimated \textit{human} performance~(based on inter-annotator agreement) and a simple computational \textit{baseline} are also reported.\label{tab:results}}
-  \end{table*}
+    \begin{tabular}{l|rrrr|rrrr|rrrr}
+      \toprule
+                       & \multicolumn{4}{c|}{\textit{Medline}} & \multicolumn{4}{c|}{\textit{Wikinews}} & \multicolumn{4}{c}{\textit{CORD}}                                                                                                                                                                                                          \\
+                       & \multicolumn{2}{c}{\textbf{Task A}}   & \multicolumn{2}{c|}{\textbf{Task B}}   & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c}{\textbf{Task B}}                                                                                     \\
+      \textbf{Team}    & $F_1$                                 & \textit{Diff}                          & $F_1$                               & \textit{Diff}                        & $F_1$                               & \textit{Diff}                       & $F_1$     & \textit{Diff} & $F_1$     & \textit{Diff} & $F_1$     & \textit{Diff} \\
+      \midrule
+      Vicomtech        & \bf 0.843                             & 0.156                                  & 0.467                               & 0.093                                & \bf 0.794                           & 0.106                               & 0.478     & 0.104         & 0.576     & -0.111        & 0.256     & -0.118        \\
+      PUCRJ-PUCPR-UFMG & 0.779                                 & 0.071                                  & 0.374                               & 0.109                                & 0.781                               & 0.073                               & 0.362     & 0.098         & \bf 0.641 & -0.067        & 0.170     & -0.095        \\
+      IXA              & 0.699                                 & 0.045                                  & \bf 0.562                           & 0.130                                & 0.714                               & 0.060                               & \bf 0.493 & 0.062         & 0.609     & -0.045        & \bf 0.338 & -0.094        \\
+      uhKD4            & 0.772                                 & 0.242                                  & 0.538                               & 0.219                                & 0.714                               & 0.184                               & 0.431     & 0.112         & 0.348     & -0.182        & 0.127     & -0.192        \\
+      UH-MMM           & 0.692                                 & 0.081                                  & 0.158                               & 0.104                                & 0.695                               & 0.083                               & 0.061     & 0.006         & 0.538     & -0.073        & 0.014     & -0.041        \\
+      Codestrange      & 0.177                                 & 0.096                                  & 0.138                               & 0.105                                & 0.124                               & 0.042                               & 0.008     & -0.025        & 0.017     & -0.065        & 0.000     & -0.033        \\
+      JAD              & 0.238                                 & -0.025                                 & 0.036                               & 0.028                                & 0.243                               & -0.02                               & 0.000     & -0.007        & 0.280     & 0.017         & 0.000     & -0.007        \\
+      GuanZhengyi      & 0.807                                 & 0.470                                  & 0.000                               & 0.000                                & 0.286                               & -0.05                               & 0.000     & 0.000         & 0.000     & -0.336        & 0.000     & 0.000         \\
+      Maoqin           & 0.266                                 & 0.094                                  & 0.000                               & 0.000                                & 0.269                               & 0.097                               & 0.000     & 0.000         & 0.000     & -0.172        & 0.000     & 0.000         \\
+      \midrule
+      Mean difference  &                                       & 0.136                                  &                                     & 0.087                                &                                     & 0.063                               &           & 0.038         &           & -0.114        &           & -0.064        \\
+      \bottomrule
+    \end{tabular}}
+  \caption{Individual results per domain in subtasks A and B. The \textit{Diff} column corresponds to the absolute difference between the presented $F_1$ and the aggregated $F_1$ on the corresponding scenario,
+    as reported in Table~\ref{tab:results}. A positive \textit{Diff} indicates that team had a correspondingly better result on that specific subset than in the overall corpus.\label{tab:models}}
+\end{table*}
+
+
 
 Table~\ref{tab:results} summarises the main results obtained by all participants in the eHealth-KD 2021 Challenge.
 In the main scenario the best performing system was the joint architecture presented by Vicomtech, followed closely by a very similar architecture presented by PUCRJ-PUCPR-UFMG.
@@ -307,34 +339,15 @@ Most participants have a better performance on the subset of the test collection
 On average, performance on \textit{Medline}~(the most common source) is $25.2$ and $15.2$ percent points higher than on \textit{CORD}~(the least common source) for subtask A and B, respectively.
 This suggests that multilingual pre-trained models alone are insufficient as an effective transfer learning method in low-resource scenarios such as the one presented in this challenge.
 
-\todo[inline]{Comentar GuanZengyi con respecto a la complejidad del transfer learning...}
+Figure~\ref{fig:transfer} represents the performance for each team across different subset collections of the testing set. As it can be observed, most teams present a significant drop in performance, in both subtasks, for the CORD subset with respect to the Medline and the Wikinews subsets.
+This highlights the relative difficulty of the transfer learning component of the challenge.
+IXA presented the most robust system in this respect.
+As an illustrative example, the system presented by GuanZengyi obtained the second best results on the Medline subset of the testing collection, but their performance drops sharply in the remaining subsets, hence achieving an overall score marginally superior to the baseline.
 
-\begin{table*}[htb]
-  \resizebox{\textwidth}{!}{
-  \begin{tabular}{l|rrrr|rrrr|rrrr}
-    \toprule
-    & \multicolumn{4}{c|}{\textit{Medline}} & \multicolumn{4}{c|}{\textit{Wikinews}} & \multicolumn{4}{c}{\textit{CORD}} \\
-    & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c|}{\textbf{Task B}} & \multicolumn{2}{c}{\textbf{Task A}} & \multicolumn{2}{c}{\textbf{Task B}} \\
-    \textbf{Team} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} & $F_1$ & \textit{Diff} \\
-    \midrule
-Vicomtech        & \bf 0.843 &  0.156 & 0.467 & 0.093 & \bf 0.794 & 0.106 & 0.478 &  0.104 & 0.576 & -0.111 & 0.256 & -0.118 \\
-PUCRJ-PUCPR-UFMG & 0.779 &  0.071 & 0.374 & 0.109 & 0.781 & 0.073 & 0.362 &  0.098 & \bf 0.641 & -0.067 & 0.170 & -0.095 \\
-IXA              & 0.699 &  0.045 & \bf 0.562 & 0.130 & 0.714 & 0.060 & \bf 0.493 &  0.062 & 0.609 & -0.045 & \bf 0.338 & -0.094 \\
-uhKD4            & 0.772 &  0.242 & 0.538 & 0.219 & 0.714 & 0.184 & 0.431 &  0.112 & 0.348 & -0.182 & 0.127 & -0.192 \\
-UH-MMM           & 0.692 &  0.081 & 0.158 & 0.104 & 0.695 & 0.083 & 0.061 &  0.006 & 0.538 & -0.073 & 0.014 & -0.041 \\
-Codestrange      & 0.177 &  0.096 & 0.138 & 0.105 & 0.124 & 0.042 & 0.008 & -0.025 & 0.017 & -0.065 & 0.000 & -0.033 \\
-JAD              & 0.238 & -0.025 & 0.036 & 0.028 & 0.243 & -0.02 & 0.000 & -0.007 & 0.280 &  0.017 & 0.000 & -0.007 \\
-GuanZhengyi      & 0.807 &  0.470 & 0.000 & 0.000 & 0.286 & -0.05 & 0.000 &  0.000 & 0.000 & -0.336 & 0.000 &  0.000 \\
-Maoqin           & 0.266 &  0.094 & 0.000 & 0.000 & 0.269 & 0.097 & 0.000 &  0.000 & 0.000 & -0.172 & 0.000 &  0.000 \\
-    \midrule
-    Mean difference &       & 0.136 &       & 0.087 &       & 0.063 &       & 0.038 &       & -0.114 &       & -0.064 \\
-    \bottomrule
-  \end{tabular}}
-  \caption{Individual results per domain in subtasks A and B. The \textit{Diff} column corresponds to the absolute difference between the presented $F_1$ and the aggregated $F_1$ on the corresponding scenario,
-  as reported in Table~\ref{tab:results}. A positive \textit{Diff} indicates that team had a correspondingly better result on that specific subset than in the overall corpus.\label{tab:models}}
-\end{table*}
-
-\todo[inline]{Grafica de lineas para ver la evolucion del transferlearning entre diminios}
+\begin{figure*}
+  \includegraphics[width=\textwidth]{transfer.png}
+  \caption{Graphical representation of the performance by team in each subset collection of the testing set. Each bar represents the scores obtained by each team in both subtasks in a specific subset collection.\label{fig:transfer}}
+\end{figure*}
 
 Modelling both subtasks independently seems to be less effective than using some form of shared architecture.
 The three best performing systems exploit in some manner the interrelation between both subtasks, either by using a single architecture with separate outputs~(thus sharing a large part of the feature extraction model), or by reusing the same architecture in both subtasks.
@@ -354,9 +367,9 @@ However, being a text-to-text model, it suffers from hallucination, which requir
 Furthermore, the output structure still contains unnecessary redundancy~(the same entities need to be predicted for every relation in which they appear).
 However, we believe that this is a fruitful direction for future research that should be explored in greater depth.
 
-Moving towards a full solution to the eHealth-KD challenge, there are some fundamental obstacles that still need to be tackled.
+Moving towards a full solution for the eHealth-KD challenge, there are some fundamental obstacles that still need to be tackled.
 The most salient one is effectively capturing the interaction between entities and the semantic relations in which they appear.
-As we have learned from observing human annotators, they usually annotate simultaneously entities and relations.
+As we have learned from observing human annotators, they usually annotate entities and relations simultaneously.
 Furthermore, they do not follow the left-to-right natural order of the sentence, but rather annotate the most salient entities first~(e.g., the main Action and related Concepts) and then add the contextual relations and supporting entities.
 Although it is unclear whether this strategy is necessary, it presents an interesting alternative approach for designing an automatic annotation system in the form of an agent that performs annotation actions on the sentence, perhaps trained with a reinforcement learning approach.
 For this purpose, it could be interesting to analyse not only the final annotated sentence but the individual annotation events that human annotators produce, including the undoing previous annotations.
@@ -378,7 +391,7 @@ New approaches not based on the standard NER pipeline seem promising, but still 
 \todo[inline]{Hablar del aporte de la tarea}
 
 \section*{Acknowledgements}
-This research has been supported by a Carolina Foundation grant in agreement with University of Alicante and University of Havana. Moreover, the research has been partially funded by the University of Alicante and the University of Havana, the Generalitat Valenciana (\textit{Conselleria d’Educació, Investigació, Cultura i Esport}) and the Spanish Government through the projects LIVING-LANG (RTI2018-094653-B-C22), INTEGER (RTI2018-094649-B-I00)  and SIIA (PROMETEO/2018/089, PROMETEU/2018/089). Additionally, it has been backed by the work of both COST Actions: \texttt{CA19134} -- \textit{``Distributed Knowledge Graphs''} and \texttt{CA19142} -- \textit{``Leading Platform for European Citizens, Industries, Academia and Policymakers in Media Accessibility''}.
+This research has been supported by a Carolina Foundation grant in agreement with University of Alicante and University of Havana. Moreover, the research has been partially funded by the University of Alicante and the University of Havana, the Generalitat Valenciana (\textit{Conselleria d’Educació, Investigació, Cultura i Esport}) and the Spanish Government through the projects LIVING-LANG (\texttt{RTI2018-094653-B-C22}), INTEGER (\texttt{RTI2018-094649-B-I00})  and SIIA (\texttt{PROMETEO/2018/089}, \texttt{PROMETEU/2018/089}). Additionally, it has been backed by the work of both COST Actions: \texttt{CA19134} -- \textit{``Distributed Knowledge Graphs''} and \texttt{CA19142} -- \textit{``Leading Platform for European Citizens, Industries, Academia and Policymakers in Media Accessibility''}.
 
 \bibliographystyle{fullname}
 \bibliography{bibliography}
