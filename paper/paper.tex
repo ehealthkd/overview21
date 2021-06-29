@@ -349,6 +349,16 @@ As an illustrative example, the system presented by GuanZengyi obtained the seco
   \caption{Graphical representation of the performance by team in each subset collection of the testing set. Each bar represents the scores obtained by each team in both subtasks in a specific subset collection.\label{fig:transfer}}
 \end{figure*}
 
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.6\textwidth]{labels.png}
+  \caption{Graphical representation of the relative difficulty of each type of annotation. We compute the relative number of systems that correctly identified each annotation of each type. Boxplots show the mininum, maximum, and interquartile range.\label{fig:labels}}
+\end{figure*}
+
+Figure~\ref{fig:labels} compares annotation labels according to their relative difficulty. We define the difficulty of a specific annotation~(e.g., a specific entity or relation instance in the testing set) as the relative number of systems that correctly identified that annotation.
+Afterwards, we compute the interquartile range of the difficulty score for each of the annotations in the testing set.
+The figure suggests that entities are, on average, easier to recognize than relations, which is consistent with the superior results obtained in Subtask A compared to Subtask B by all participants.
+
 Modelling both subtasks independently seems to be less effective than using some form of shared architecture.
 The three best performing systems exploit in some manner the interrelation between both subtasks, either by using a single architecture with separate outputs~(thus sharing a large part of the feature extraction model), or by reusing the same architecture in both subtasks.
 In contrast, systems that attempt to solve subtask B based on structured information obtained from subtask A have a significant drop in performance in this task.
@@ -379,8 +389,6 @@ Detecting the most relevant entities and relations is but a first step in a hypo
 Moving up in this pipeline, the next natural step is to create semantic structures~(e.g., knowledge graphs) that integrate the entities and relations detected in a corpus of related sentences.
 This could enable using natural language queries that can be answered with precise factual information encoded in such a semantic structure.
 Future editions of the eHealth-KD challenge will focus on those types of problems, in an attempt to continue fostering research in the full problem of knowledge discovery in natural language.
-
-\todo[inline]{Grafica de dispersion dificultad para identificar cada tipo de etiqueta}
 
 \section{Conclusions}\label{sec:conclusions}
 
